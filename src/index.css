@@ -1,0 +1,53 @@
+@import url('https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-display bg-brand-black text-brand-white antialiased;
+  }
+
+  h1 {
+    @apply font-black text-5xl md:text-7xl lg:text-8xl leading-tight;
+  }
+
+  h2 {
+    @apply font-bold text-4xl md:text-5xl lg:text-6xl leading-tight;
+  }
+
+  h3 {
+    @apply font-medium text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  h4 {
+    @apply font-medium text-xl md:text-2xl;
+  }
+
+  p {
+    @apply font-regular text-base md:text-lg leading-relaxed;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+  }
+
+  .glass-panel-hover {
+    @apply transition-all duration-300 hover:bg-white/10 hover:border-vivid-orange/50 hover:shadow-lg hover:shadow-vivid-orange/20;
+  }
+
+  .glow-orange {
+    box-shadow: 0 0 20px rgba(255, 97, 0, 0.3), 0 0 40px rgba(255, 97, 0, 0.1);
+  }
+
+  .btn-primary {
+    @apply px-8 py-4 bg-vivid-orange text-brand-white font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-vivid-orange/50 hover:scale-105;
+  }
+
+  .btn-outline {
+    @apply px-8 py-4 border-2 border-vivid-orange text-brand-white font-medium rounded-full transition-all duration-300 hover:bg-vivid-orange/10 hover:shadow-lg hover:shadow-vivid-orange/30;
+  }
+}
