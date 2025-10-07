@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 
 export default function Hero() {
@@ -82,13 +82,6 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-radial from-vivid-orange/5 via-transparent to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 glass-panel glow-orange animate-float">
-          <Sparkles className="w-4 h-4 text-vivid-orange" />
-          <span className="text-sm font-light text-neutral-300">
-            Design-First Creative Studio
-          </span>
-        </div>
-
         <h1 className="mb-6 bg-gradient-to-b from-brand-white to-neutral-400 bg-clip-text text-transparent">
           Design-First.
           <br />
