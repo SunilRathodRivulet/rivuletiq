@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
 import Home from './pages/Home';
 import WhatWeCreatePage from './pages/WhatWeCreate';
 import DesignCreative from './pages/create/DesignCreative';
@@ -34,6 +35,7 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <CustomCursor />
       <div className="min-h-screen">
         <Header />
         <main>

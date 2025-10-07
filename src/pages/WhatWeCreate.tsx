@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import PageHero from '../components/shared/PageHero';
 import Section from '../components/shared/Section';
 import CTASection from '../components/shared/CTASection';
+import Tilt3D from '../components/Tilt3D';
 import { Palette, Globe, Laptop, ShoppingCart, Brain, Search } from 'lucide-react';
 
 export default function WhatWeCreatePage() {
@@ -63,11 +64,11 @@ export default function WhatWeCreatePage() {
           {services.map((service) => {
             const Icon = service.icon;
             return (
-              <Link
-                key={service.title}
-                to={service.href}
-                className="glass-panel glass-panel-hover p-8 group"
-              >
+              <Tilt3D key={service.title}>
+                <Link
+                  to={service.href}
+                  className="glass-panel glass-panel-hover p-8 group block h-full"
+                >
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center group-hover:bg-vivid-orange/20 transition-colors">
                     <Icon className="w-7 h-7 text-vivid-orange" />
@@ -84,6 +85,7 @@ export default function WhatWeCreatePage() {
                   </svg>
                 </span>
               </Link>
+              </Tilt3D>
             );
           })}
         </div>

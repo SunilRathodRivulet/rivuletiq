@@ -7,6 +7,11 @@
 @layer base {
   body {
     @apply font-display bg-brand-black text-brand-white antialiased;
+    cursor: none;
+  }
+
+  * {
+    cursor: none !important;
   }
 
   h1 {
@@ -49,5 +54,97 @@
 
   .btn-outline {
     @apply px-8 py-4 border-2 border-vivid-orange text-brand-white font-medium rounded-full transition-all duration-300 hover:bg-vivid-orange/10 hover:shadow-lg hover:shadow-vivid-orange/30;
+  }
+
+  .custom-cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: #FF6100;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 97, 0, 0.6), 0 0 40px rgba(255, 97, 0, 0.3);
+    opacity: 0;
+  }
+
+  .custom-cursor.visible {
+    opacity: 1;
+    animation: cursorPulse 2s ease-in-out infinite;
+  }
+
+  .custom-cursor.cursor-pointer {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 97, 0, 0.1);
+    border: 2px solid #FF6100;
+  }
+
+  .custom-cursor-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 97, 0, 0.3);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+  }
+
+  .custom-cursor-follower.visible {
+    opacity: 1;
+    animation: followerFloat 3s ease-in-out infinite;
+  }
+
+  .custom-cursor-follower.cursor-pointer {
+    width: 60px;
+    height: 60px;
+    border-color: rgba(255, 97, 0, 0.5);
+  }
+
+  @keyframes cursorPulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+  }
+
+  @keyframes followerFloat {
+    0%, 100% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    50% {
+      transform: translate(-50%, -50%) rotate(180deg);
+    }
+  }
+
+  .tilt-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+  }
+
+  .tilt-3d:hover {
+    transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale3d(1.05, 1.05, 1.05);
+  }
+
+  @media (max-width: 768px) {
+    body, * {
+      cursor: auto !important;
+    }
+
+    .custom-cursor,
+    .custom-cursor-follower {
+      display: none;
+    }
+
+    .tilt-3d:hover {
+      transform: none;
+    }
   }
 }
