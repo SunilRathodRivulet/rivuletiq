@@ -42,22 +42,22 @@ export default function Footer() {
 
             <div className="space-y-3">
               <a
-                href="mailto:hello@rivuletiq.com"
+                href="mailto:contact@rivuletiq.com"
                 className="flex items-center gap-3 text-neutral-400 hover:text-vivid-orange transition-colors group"
               >
                 <Mail className="w-4 h-4" />
-                <span className="text-sm font-light">hello@rivuletiq.com</span>
+                <span className="text-sm font-light">contact@rivuletiq.com</span>
               </a>
               <a
-                href="tel:+1234567890"
+                href="tel:+918799225285"
                 className="flex items-center gap-3 text-neutral-400 hover:text-vivid-orange transition-colors group"
               >
                 <Phone className="w-4 h-4" />
-                <span className="text-sm font-light">+1 (234) 567-890</span>
+                <span className="text-sm font-light">+91 879 922 5285</span>
               </a>
-              <div className="flex items-center gap-3 text-neutral-400">
-                <MapPin className="w-4 h-4" />
-                <span className="text-sm font-light">San Francisco, CA</span>
+              <div className="flex items-start gap-3 text-neutral-400">
+                <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span className="text-sm font-light">Zion Z1, Bodakdev, Ahmedabad 380054, India</span>
               </div>
             </div>
 

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import PageHero from '../components/shared/PageHero';
 import Section from '../components/shared/Section';
-import { Mail, MapPin, Calendar, Send } from 'lucide-react';
+import { Mail, MapPin, Calendar, Send, Phone } from 'lucide-react';
 
 export default function Contact() {
   return (
@@ -42,8 +42,21 @@ export default function Contact() {
               <p className="text-neutral-400 mb-6 leading-relaxed">
                 Prefer to write it out? Send us a note — we respond within 1 business day.
               </p>
-              <a href="mailto:hello@rivuletiq.com" className="text-vivid-orange hover:underline text-lg">
-                hello@rivuletiq.com
+              <a href="mailto:contact@rivuletiq.com" className="text-vivid-orange hover:underline text-lg">
+                contact@rivuletiq.com
+              </a>
+            </div>
+
+            <div className="glass-panel p-8">
+              <div className="w-14 h-14 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center mb-6">
+                <Phone className="w-7 h-7 text-vivid-orange" />
+              </div>
+              <h3 className="text-2xl font-medium mb-4">Phone</h3>
+              <p className="text-neutral-400 mb-6 leading-relaxed">
+                Give us a call to discuss your project.
+              </p>
+              <a href="tel:+918799225285" className="text-vivid-orange hover:underline text-lg">
+                +91 879 922 5285
               </a>
             </div>
 
@@ -128,15 +141,31 @@ export default function Contact() {
         centered
         className="bg-white/5"
       >
-        <div className="flex items-center justify-center gap-3 mt-6">
-          <MapPin className="w-5 h-5 text-vivid-orange" />
-          <p className="text-neutral-300">
-            Iscon Platinum, Bopal, Ahmedabad, Gujarat, India
+        <div className="max-w-3xl mx-auto">
+          <div className="glass-panel p-8">
+            <div className="flex items-start gap-4 mb-6">
+              <MapPin className="w-6 h-6 text-vivid-orange flex-shrink-0 mt-1" />
+              <div>
+                <p className="text-neutral-300 leading-relaxed">
+                  1316-1324, Zion Z1, Nr. Avlon Hotel,<br />
+                  Sindhubhavan Marg, Bodakdev,<br />
+                  Ahmedabad 380054, Gujarat, India
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://www.google.com/maps/place/Rivulet+IQ/@23.0453064,72.5073834,19z/data=!3m1!4b1!4m6!3m5!1s0x395e9b9f80664945:0x6dfe6d4a86edd3c2!8m2!3d23.0453052!4d72.5080271!16s%2Fg%2F11wv2625wb?coh=225987&entry=tts&g_ep=EgoyMDI1MDEwNy4wIPu8ASoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline inline-block"
+            >
+              View on Google Maps
+            </a>
+          </div>
+          <p className="text-neutral-400 mt-6 text-center">
+            Drop by for a coffee, a chat, or a brainstorming session.
           </p>
         </div>
-        <p className="text-neutral-400 mt-4">
-          Drop by for a coffee, a chat, or a brainstorming session.
-        </p>
       </Section>
     </>
   );
