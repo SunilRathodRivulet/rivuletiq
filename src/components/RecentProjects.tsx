@@ -1,7 +1,8 @@
-          import { ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Tilt3D from './Tilt3D';
 import AnimatedBackground from './AnimatedBackground';
+import portfolioData from '../data/portfolioData.json';
 
 interface Project {
   category: string;
@@ -15,68 +16,17 @@ interface Project {
 }
 
 export default function RecentProjects() {
-  const projects: Project[] = [
-    {
-      category: 'SaaS Platform',
-      title: 'AI-Powered Analytics Dashboard',
-      description:
-        'A next-generation analytics platform that helps teams make data-driven decisions faster with AI-powered insights and real-time collaboration features.',
-      metrics: [
-        { value: '3x', label: 'User Growth' },
-        { value: '45%', label: 'Time Saved' },
-        { value: '$2M', label: 'Series A' },
-      ],
-      features: [
-        'Real-time data visualization',
-        'AI-powered predictive analytics',
-        'Collaborative team workspaces',
-        'Custom integrations & API',
-      ],
-      tech: ['React', 'Node.js', 'PostgreSQL', 'OpenAI', 'AWS'],
-      image: 'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      liveUrl: 'https://example.com',
-    },
-    {
-      category: 'E-Commerce',
-      title: 'Premium Fashion Marketplace',
-      description:
-        'A sophisticated e-commerce platform connecting luxury fashion brands with discerning customers through curated collections and personalized shopping experiences.',
-      metrics: [
-        { value: '250K+', label: 'Monthly Users' },
-        { value: '98%', label: 'Satisfaction' },
-        { value: '5x', label: 'Revenue Growth' },
-      ],
-      features: [
-        'AI-powered recommendations',
-        'Virtual try-on technology',
-        'Seamless checkout experience',
-        'Multi-currency support',
-      ],
-      tech: ['Next.js', 'Shopify', 'Stripe', 'TailwindCSS', 'Vercel'],
-      image: 'https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      liveUrl: 'https://example.com',
-    },
-    {
-      category: 'Healthcare Tech',
-      title: 'Telehealth Platform',
-      description:
-        'Secure and intuitive telehealth solution enabling seamless virtual consultations, appointment scheduling, and patient record management for healthcare providers.',
-      metrics: [
-        { value: '50K+', label: 'Consultations' },
-        { value: '4.9/5', label: 'Rating' },
-        { value: '99.9%', label: 'Uptime' },
-      ],
-      features: [
-        'HIPAA-compliant video calls',
-        'Electronic health records',
-        'Prescription management',
-        'Insurance integration',
-      ],
-      tech: ['Vue.js', 'Laravel', 'WebRTC', 'MySQL', 'Digital Ocean'],
-      image: 'https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      liveUrl: 'https://example.com',
-    },
-  ];
+  // Convert portfolio data to project format
+  const projects: Project[] = portfolioData.map(client => ({
+    category: client.category,
+    title: client.client_name,
+    description: client.description,
+    metrics: client.metrics,
+    features: client.features,
+    tech: client.tech,
+    image: client.photo_links[0]?.replace('public/', '/'),
+    liveUrl: client.client_website,
+  }));
 
   return (
     <section className="relative py-32 px-6 overflow-hidden">
@@ -92,7 +42,10 @@ export default function RecentProjects() {
             <br /><br />
             Each project is a reflection of the brands we help shape — intelligent, intuitive, and built to grow.
           </p>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap gap-4 justify-center">
+            <Link to="/portfolio" className="btn-primary">
+              View Full Portfolio
+            </Link>
             <Link to="/deliver" className="btn-outline">
               See Our Approach
             </Link>

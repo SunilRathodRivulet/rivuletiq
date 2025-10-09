@@ -39,27 +39,27 @@
     },
     "portfolio": {
       "keywords": ["portfolio", "projects", "work", "examples", "case studies", "clients"],
-      "response": "We've worked with amazing clients across various industries! Some notable projects include MORryde (diverse product lineup), Decorative Panels International (3D scene rendering), Horton (ambulance manufacturer), Champion (tough and dependable brand), Collins Bus (Type A bus manufacturer), and many more. Would you like to know about a specific project?",
+      "response": "We've worked with amazing clients across various industries! Our portfolio includes MORryde (brand strategy & web design), Decorative Panels International (modern website with 3D rendering), Horton (ambulance manufacturer brand differentiation), Champion (tough and dependable brand identity), and Collins Bus (industry-leading Type A bus manufacturer). You can view our complete portfolio at /portfolio. Would you like to know about a specific project?",
       "projects": {
         "morryde": {
           "keywords": ["morryde"],
-          "response": "MORryde is one of our diverse product lineup projects. With a wide range of products, MORryde needed a comprehensive digital solution to showcase their offerings effectively."
+          "response": "MORryde struggled to define their key differentiators with their diverse product lineup. We executed a comprehensive brand audit followed by an annual plan to roll out their new identity. This included strategic brand positioning and web design to showcase their metal fabrication expertise."
         },
         "decorative panels": {
           "keywords": ["decorative panels", "dpi", "3d rendering"],
-          "response": "Decorative Panels International needed a modern website to replace their outdated one. We delivered a highly visual and engaging design that included professional 3D scene rendering to showcase their products beautifully."
+          "response": "Decorative Panels International needed a modern website to showcase their decorative panel products and services. We delivered a highly visual and engaging design that included professional 3D scene rendering to beautifully showcase their products."
         },
         "horton": {
           "keywords": ["horton", "ambulance"],
-          "response": "Horton is a premier ambulance manufacturer under the REV Group. We helped them create a digital presence that reflects their commitment to quality and innovation in emergency vehicle manufacturing."
+          "response": "Horton, a premier ambulance manufacturer under the REV Group, needed to differentiate itself from seven sister ambulance brands. We helped them create a unique digital presence that reflects their commitment to quality and innovation in emergency vehicle manufacturing."
         },
         "champion": {
           "keywords": ["champion", "rev group"],
-          "response": "Champion is known as the 'tough and dependable' brand under REV Group. We helped them build a digital platform that embodies their rugged, reliable brand identity."
+          "response": "Champion is known as the 'tough and dependable' brand under REV Group. We helped them build a website that reflects their rugged reputation and embodies their reliable brand identity in the transportation industry."
         },
         "collins bus": {
           "keywords": ["collins bus", "type a bus"],
-          "response": "Collins Bus is the industry-leading Type A bus manufacturer. We were tasked with creating a digital solution that showcases their expertise and innovation in bus manufacturing."
+          "response": "Collins Bus is the industry-leading Type A bus manufacturer. We were tasked with creating a modern digital presence that showcases their expertise and innovation in bus manufacturing, helping them maintain their market leadership position."
         },
         "renegade rv": {
           "keywords": ["renegade rv"],

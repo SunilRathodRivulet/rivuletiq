@@ -1,0 +1,107 @@
+[
+  {
+    "client_name": "MORryde",
+    "description": "With a diverse lineup of products, MORryde struggled to define its company's key differentiators, so the metal fabricator turned to Rivulet IQ to execute a brand audit, followed by an annual plan to roll out the new identity.",
+    "client_website": "https://www.morryde.com/",
+    "photo_links": [
+      "public/images/morryde-header.jpg"
+    ],
+    "category": "Brand Strategy & Web Design",
+    "metrics": [
+      { "value": "Brand Audit", "label": "Complete Analysis" },
+      { "value": "Annual Plan", "label": "Rollout Strategy" },
+      { "value": "Identity", "label": "New Brand" }
+    ],
+    "features": [
+      "Comprehensive brand audit",
+      "Strategic identity development",
+      "Multi-product portfolio showcase",
+      "Annual rollout planning"
+    ],
+    "tech": ["Brand Strategy", "Web Design", "Identity Design", "Strategic Planning"]
+  },
+  {
+    "client_name": "Decorative Panels International",
+    "description": "When DPI needed a modern website to showcase their decorative panel products and services.",
+    "client_website": "https://www.decpanels.com/",
+    "photo_links": [
+      "public/images/dec-panels-header.jpg"
+    ],
+    "category": "Web Design & Development",
+    "metrics": [
+      { "value": "Modern Design", "label": "Visual Appeal" },
+      { "value": "3D Rendering", "label": "Product Showcase" },
+      { "value": "User Experience", "label": "Enhanced UX" }
+    ],
+    "features": [
+      "Modern website design",
+      "Professional 3D scene rendering",
+      "Product showcase optimization",
+      "Enhanced user experience"
+    ],
+    "tech": ["Web Design", "3D Rendering", "UX/UI", "Product Photography"]
+  },
+  {
+    "client_name": "Horton",
+    "description": "When Horton, a premier ambulance manufacturer under the REV Group, needed to differentiate itself from seven sister ambulance brands.",
+    "client_website": "https://www.hortonambulance.com/",
+    "photo_links": [
+      "public/images/horton-header.jpg"
+    ],
+    "category": "Brand Differentiation & Web Design",
+    "metrics": [
+      { "value": "Brand Differentiation", "label": "Unique Identity" },
+      { "value": "REV Group", "label": "Parent Company" },
+      { "value": "7 Sister Brands", "label": "Competitive Edge" }
+    ],
+    "features": [
+      "Brand differentiation strategy",
+      "Competitive positioning",
+      "Professional website design",
+      "Industry-specific optimization"
+    ],
+    "tech": ["Brand Strategy", "Web Design", "Competitive Analysis", "Manufacturing Focus"]
+  },
+  {
+    "client_name": "Champion",
+    "description": "Known as the 'tough and dependable' brand under REV Group, Champion needed a website that reflected their rugged reputation.",
+    "client_website": "https://www.championbus.com/",
+    "photo_links": [
+      "public/images/champion-header.jpg"
+    ],
+    "category": "Brand Identity & Web Development",
+    "metrics": [
+      { "value": "Tough & Dependable", "label": "Brand Values" },
+      { "value": "REV Group", "label": "Parent Company" },
+      { "value": "Rugged Reputation", "label": "Brand Image" }
+    ],
+    "features": [
+      "Brand identity reinforcement",
+      "Rugged design aesthetic",
+      "Dependability messaging",
+      "Professional web presence"
+    ],
+    "tech": ["Brand Identity", "Web Development", "Visual Design", "Messaging Strategy"]
+  },
+  {
+    "client_name": "Collins Bus",
+    "description": "The industry-leading Type A bus manufacturer tasked Rivulet IQ with creating a modern digital presence.",
+    "client_website": "https://www.collinsbus.com/",
+    "photo_links": [
+      "public/images/collins-bus-header.jpg"
+    ],
+    "category": "Digital Transformation & Web Design",
+    "metrics": [
+      { "value": "Industry Leading", "label": "Market Position" },
+      { "value": "Type A Buses", "label": "Specialization" },
+      { "value": "Modern Presence", "label": "Digital Upgrade" }
+    ],
+    "features": [
+      "Modern digital presence",
+      "Industry leadership positioning",
+      "Type A bus specialization",
+      "Professional web design"
+    ],
+    "tech": ["Digital Strategy", "Web Design", "Industry Focus", "Modern Development"]
+  }
+]

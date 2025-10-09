@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ensure body has black background to prevent white screen */
+body {
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 /* Neue Haas Display Font Face Declarations */
 @font-face {
   font-family: 'Neue Haas Display';
@@ -473,6 +481,13 @@
   background: #000000;
   overflow: hidden;
   font-family: 'Neue Haas Display', system-ui, sans-serif;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.enhanced-loader.loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* Enhanced background with multiple layers */
@@ -995,6 +1010,88 @@
   100% { 
     transform: translate(-50%, -50%) scale(2); 
     opacity: 0; 
+  }
+}
+
+/* Interaction Prompt Styles */
+.interaction-prompt {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  animation: promptFadeIn 0.5s ease-out;
+}
+
+.prompt-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.prompt-pulse {
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(255, 97, 0, 0.4);
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: promptPulse 2s ease-in-out infinite;
+  position: relative;
+}
+
+.prompt-pulse::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 97, 0, 0.8);
+  border-radius: 50%;
+  animation: promptDotPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes promptFadeIn {
+  0% { 
+    opacity: 0; 
+    transform: translateX(-50%) translateY(20px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateX(-50%) translateY(0); 
+  }
+}
+
+@keyframes promptPulse {
+  0% { 
+    transform: scale(1); 
+    opacity: 0.6; 
+  }
+  50% { 
+    transform: scale(1.1); 
+    opacity: 0.8; 
+  }
+  100% { 
+    transform: scale(1); 
+    opacity: 0.6; 
+  }
+}
+
+@keyframes promptDotPulse {
+  0% { 
+    transform: translate(-50%, -50%) scale(1); 
+    opacity: 0.8; 
+  }
+  50% { 
+    transform: translate(-50%, -50%) scale(1.2); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: translate(-50%, -50%) scale(1); 
+    opacity: 0.8; 
   }
 }
 

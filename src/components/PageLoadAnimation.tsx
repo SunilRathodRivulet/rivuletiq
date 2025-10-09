@@ -1,12 +1,37 @@
 import { useEffect, useState } from 'react';
 
 export default function PageLoadAnimation() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<'loading' | 'revealing' | 'complete'>('loading');
   const [glowIntensity, setGlowIntensity] = useState(0);
+  const [showInteractionPrompt, setShowInteractionPrompt] = useState(false);
+
+  // Use global launch sound function from AudioManager
+  const playLaunchSound = async () => {
+    if (typeof window !== 'undefined' && (window as any).playLaunchSound) {
+      try {
+        await (window as any).playLaunchSound();
+      } catch (error) {
+        console.warn('Launch sound failed:', error);
+      }
+    }
+  };
 
   useEffect(() => {
+    // Show loader immediately on mount
+    setIsVisible(true);
+
+    // Handle user interaction to hide prompt
+    const handleUserInteraction = () => {
+      setShowInteractionPrompt(false);
+    };
+
+    // Add click listener to hide prompt
+    document.addEventListener('click', handleUserInteraction, { once: true });
+    document.addEventListener('keydown', handleUserInteraction, { once: true });
+    document.addEventListener('touchstart', handleUserInteraction, { once: true });
+
     // Simulate loading progress with realistic curve
     const progressInterval = setInterval(() => {
       setProgress(prev => {
@@ -34,24 +59,33 @@ export default function PageLoadAnimation() {
       setPhase('complete');
     }, 2800);
 
+    // Show interaction prompt after 2 seconds if no user interaction
+    const promptTimer = setTimeout(() => {
+      setShowInteractionPrompt(true);
+    }, 2000);
+
     // Hide animation after 3.5 seconds
-    const hideTimer = setTimeout(() => {
+    const hideTimer = setTimeout(async () => {
+      await playLaunchSound();
       setIsVisible(false);
     }, 3500);
 
     return () => {
+      document.removeEventListener('click', handleUserInteraction);
+      document.removeEventListener('keydown', handleUserInteraction);
+      document.removeEventListener('touchstart', handleUserInteraction);
       clearInterval(progressInterval);
       clearInterval(glowInterval);
       clearTimeout(phaseTimer1);
       clearTimeout(phaseTimer2);
+      clearTimeout(promptTimer);
       clearTimeout(hideTimer);
     };
   }, []);
 
-  if (!isVisible) return null;
-
+  // Always render the loader container to prevent white screen
   return (
-    <div className={`enhanced-loader ${phase}`}>
+    <div className={`enhanced-loader ${phase} ${!isVisible ? 'loader-hidden' : ''}`}>
       {/* Animated background with multiple layers */}
       <div className="loader-background">
         {/* Grid pattern */}
@@ -129,6 +163,14 @@ export default function PageLoadAnimation() {
           <div className="loading-dot" />
           <div className="loading-pulse" />
         </div>
+
+        {/* User interaction prompt */}
+        {showInteractionPrompt && (
+          <div className="interaction-prompt">
+            <p className="prompt-text">Click anywhere to enable audio</p>
+            <div className="prompt-pulse" />
+          </div>
+        )}
       </div>
 
       {/* Enhanced reveal animation */}

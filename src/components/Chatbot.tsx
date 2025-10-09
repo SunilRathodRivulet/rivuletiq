@@ -18,77 +18,46 @@ export default function Chatbot() {
   const [isScrollSoundEnabled, setIsScrollSoundEnabled] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const audioContextRef = useRef<AudioContext | null>(null);
   const lastScrollTimeRef = useRef<number>(0);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Initialize Web Audio API
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.AudioContext) {
-      audioContextRef.current = new AudioContext();
+  // Use global audio functions from AudioManager
+  const playScrollSound = async (direction: 'up' | 'down', intensity: number = 0.3, speed: number = 1) => {
+    if (!isScrollSoundEnabled) return;
+    
+    if (typeof window !== 'undefined' && (window as any).playScrollSound) {
+      try {
+        await (window as any).playScrollSound(direction, intensity, speed);
+      } catch (error) {
+        console.warn('Scroll sound failed:', error);
+      }
     }
-  }, []);
-
-  // Scroll Symphony - Ambient sound design
-  const playScrollSound = (direction: 'up' | 'down', intensity: number = 0.3) => {
-    if (!isScrollSoundEnabled || !audioContextRef.current) return;
-    
-    const now = Date.now();
-    if (now - lastScrollTimeRef.current < 50) return; // Throttle sounds
-    lastScrollTimeRef.current = now;
-
-    const audioContext = audioContextRef.current;
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    // Connect nodes
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    // Configure sound based on direction and intensity
-    const baseFreq = direction === 'up' ? 200 : 150;
-    const frequency = baseFreq + (intensity * 100);
-    
-    oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-    oscillator.type = 'sine';
-    
-    // Create ambient, whisper-like effect
-    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-    gainNode.gain.linearRampToValueAtTime(intensity * 0.1, audioContext.currentTime + 0.05);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.3);
-    
-    // Add subtle vibrato for organic feel
-    const vibrato = audioContext.createOscillator();
-    const vibratoGain = audioContext.createGain();
-    vibrato.frequency.setValueAtTime(4, audioContext.currentTime);
-    vibratoGain.gain.setValueAtTime(2, audioContext.currentTime);
-    vibrato.connect(vibratoGain);
-    vibratoGain.connect(oscillator.frequency);
-    
-    // Play the sound
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.3);
-    vibrato.start(audioContext.currentTime);
-    vibrato.stop(audioContext.currentTime + 0.3);
   };
 
-  // Handle scroll events
+  // Handle scroll events (enhanced with speed detection)
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
     const scrollTop = target.scrollTop;
     const scrollHeight = target.scrollHeight;
     const clientHeight = target.clientHeight;
     
-    // Calculate scroll intensity (0-1)
+    // Calculate scroll intensity and speed
     const scrollProgress = scrollTop / (scrollHeight - clientHeight);
-    const intensity = Math.min(scrollProgress * 2, 1);
+    const intensity = Math.min(scrollProgress * 1.5, 1);
     
-    // Determine scroll direction and play sound
+    // Determine scroll direction and speed
+    const direction = scrollTop > lastScrollTimeRef.current ? 'down' : 'up';
+    const scrollDelta = Math.abs(scrollTop - lastScrollTimeRef.current);
+    const speed = Math.min(scrollDelta / 10, 3); // Normalize speed
+    
+    lastScrollTimeRef.current = scrollTop;
+    
+    // Play sound with direction, intensity, and speed
     if (scrollTop > 0) {
-      playScrollSound('down', intensity);
+      playScrollSound(direction, intensity, speed);
     }
   };
 
