@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import ScrollbarEnhancer from './components/ScrollbarEnhancer';
 import PageLoadAnimation from './components/PageLoadAnimation';
+import Chatbot from './components/Chatbot';
 import Home from './pages/Home';
 import WhatWeCreatePage from './pages/WhatWeCreate';
 import DesignCreative from './pages/create/DesignCreative';
@@ -62,10 +63,11 @@ function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
-  );
-}
+            <Footer />
+          </div>
+          <Chatbot />
+        </BrowserRouter>
+      );
+    }
 
-export default App;
+    export default App;
