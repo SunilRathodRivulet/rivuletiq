@@ -134,39 +134,6 @@ export default function Contact() {
         </div>
       </div>
 
-      <Section
-        headline="We call Ahmedabad home."
-        subheadline="Our Space"
-        copy="Our studio is built around light, conversation, and creativity — a space where ideas move freely and work feels personal."
-        centered
-        className="bg-white/5"
-      >
-        <div className="max-w-3xl mx-auto">
-          <div className="glass-panel p-8">
-            <div className="flex items-start gap-4 mb-6">
-              <MapPin className="w-6 h-6 text-vivid-orange flex-shrink-0 mt-1" />
-              <div>
-                <p className="text-neutral-300 leading-relaxed">
-                  1316-1324, Zion Z1, Nr. Avlon Hotel,<br />
-                  Sindhubhavan Marg, Bodakdev,<br />
-                  Ahmedabad 380054, Gujarat, India
-                </p>
-              </div>
-            </div>
-            <a
-              href="https://www.google.com/maps/place/Rivulet+IQ/@23.0453064,72.5073834,19z/data=!3m1!4b1!4m6!3m5!1s0x395e9b9f80664945:0x6dfe6d4a86edd3c2!8m2!3d23.0453052!4d72.5080271!16s%2Fg%2F11wv2625wb?coh=225987&entry=tts&g_ep=EgoyMDI1MDEwNy4wIPu8ASoASAFQAw%3D%3D"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline inline-block"
-            >
-              View on Google Maps
-            </a>
-          </div>
-          <p className="text-neutral-400 mt-6 text-center">
-            Drop by for a coffee, a chat, or a brainstorming session.
-          </p>
-        </div>
-      </Section>
     </>
   );
 }
