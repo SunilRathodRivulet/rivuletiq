@@ -1,7 +1,7 @@
 import Hero from '../components/Hero';
 import DualIntro from '../components/DualIntro';
 import ProofBar from '../components/ProofBar';
-import FeaturedCase from '../components/FeaturedCase';
+import RecentProjects from '../components/RecentProjects';
 import WhatWeCreate from '../components/WhatWeCreate';
 import DesignPhilosophy from '../components/DesignPhilosophy';
 import FinalCTA from '../components/FinalCTA';
@@ -12,7 +12,7 @@ export default function Home() {
       <Hero />
       <DualIntro />
       <ProofBar />
-      <FeaturedCase />
+      <RecentProjects />
       <WhatWeCreate />
       <DesignPhilosophy />
       <FinalCTA />

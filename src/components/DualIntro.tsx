@@ -1,16 +1,19 @@
 import { Building2, Rocket, ArrowRight } from 'lucide-react';
+import AnimatedBackground from './AnimatedBackground';
 
 export default function DualIntro() {
   return (
-    <section className="relative py-32 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative py-32 px-6 overflow-hidden">
+      <AnimatedBackground particleCount={35} opacity={0.3} />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <h2 className="mb-6">
-            Built for <span className="text-vivid-orange">Visionaries</span>
+            Two Worlds. One <span className="text-vivid-orange">Creative Core</span>.
           </h2>
           <p className="text-xl text-neutral-400 max-w-3xl mx-auto font-light">
-            Whether you're scaling an agency or building the next big thing,
-            we're here to turn your vision into reality.
+            Whether you're an <strong>agency</strong> seeking a reliable design-to-code partner or a <strong>founder</strong> ready to bring your vision online — we adapt to your rhythm.
+            <br /><br />
+            Our work bridges strategy, design, and technology, so ideas move seamlessly from concept to creation.
           </p>
         </div>
 
@@ -56,7 +59,7 @@ export default function DualIntro() {
             </div>
 
             <h3 className="mb-4 group-hover:text-vivid-orange transition-colors">
-              For Founders
+              For Founders & Startups
             </h3>
 
             <p className="text-neutral-400 mb-6 leading-relaxed">

@@ -1,0 +1,245 @@
+{
+  "greetings": [
+    "Hello! I'm RivuletIQ's AI assistant. How can I help you today?",
+    "Hi there! Welcome to RivuletIQ. What would you like to know?",
+    "Hey! I'm here to help you learn about RivuletIQ and our services. What can I assist you with?"
+  ],
+  "responses": {
+    "about": {
+      "keywords": ["about", "company", "who", "what", "rivulet"],
+      "response": "RivuletIQ is a design-first, AI-smart web studio. We create digital experiences that blend imagination, intelligence, and intent — helping agencies and founders build what's next. We're headquartered in India and collaborate globally with agencies and founders who share our love for detail, structure, and story."
+    },
+    "services": {
+      "keywords": ["services", "what we do", "offer", "create", "build"],
+      "response": "We offer six main services: 1) Design & Creative (Brand identity, UX/UI design), 2) Websites (High-performance websites), 3) Web Apps & SaaS (Scalable applications), 4) eCommerce (Conversion-optimized stores), 5) AI Solutions (Intelligent automation), and 6) Audits & Reviews (Deep-dive analysis)."
+    },
+    "process": {
+      "keywords": ["process", "how", "workflow", "deliver", "approach"],
+      "response": "Our process follows five key steps: 1) Discover (Understanding your audience and goals), 2) Design (Translating insight into interfaces), 3) Develop (Clean, scalable code), 4) QA & Review (Rigorous testing), and 5) Launch & Support (Seamless deployment and optimization)."
+    },
+    "pricing": {
+      "keywords": ["price", "cost", "budget", "expensive", "affordable"],
+      "response": "We offer flexible engagement models: Partner With Us (White-label partnerships), Managed Projects (Fixed-cost or milestone-based), Dedicated/Blended FTE (Full-time team members), and Ad-Hoc Smalls (Quick tasks). Pricing varies based on project scope and requirements. Let's discuss your specific needs!"
+    },
+    "timeline": {
+      "keywords": ["timeline", "duration", "how long", "time", "schedule"],
+      "response": "Project timelines vary based on complexity and scope. Typically: Websites (4-8 weeks), Web Apps (8-16 weeks), eCommerce (6-12 weeks), AI Solutions (4-10 weeks). We provide detailed timelines during our discovery phase and keep you updated throughout the project."
+    },
+    "contact": {
+      "keywords": ["contact", "reach", "email", "phone", "get in touch"],
+      "response": "You can reach us through: Email: contact@rivuletiq.com, Phone: +91 879 922 5285, or book a discovery call through our contact page. For careers, email hr@rivuletiq.com. We respond within 1 business day!"
+    },
+    "careers": {
+      "keywords": ["careers", "jobs", "hiring", "work", "join", "team"],
+      "response": "We're always looking for talented individuals! Current openings include: Creative & Marketing roles, Strategy & Client roles, Project Management & Operations, and Technical & SEO roles. All roles are based in Ahmedabad unless mentioned otherwise. Send your resume to hr@rivuletiq.com!"
+    },
+    "technology": {
+      "keywords": ["tech", "technology", "stack", "tools", "framework"],
+      "response": "We use modern technologies including: CMS (WordPress, Craft CMS, Drupal), Custom Development (Laravel, Vue.js, React.js, Node.js, Python), eCommerce (Shopify, WooCommerce, Magento), and AI tools (OpenAI, Google Vertex AI, LangChain). We choose tools based on purpose, not trends."
+    },
+    "portfolio": {
+      "keywords": ["portfolio", "projects", "work", "examples", "case studies", "clients"],
+      "response": "We've worked with amazing clients across various industries! Our portfolio includes MORryde (brand strategy & web design), Decorative Panels International (modern website with 3D rendering), Horton (ambulance manufacturer brand differentiation), Champion (tough and dependable brand identity), and Collins Bus (industry-leading Type A bus manufacturer). You can view our complete portfolio at /portfolio. Would you like to know about a specific project?",
+      "projects": {
+        "morryde": {
+          "keywords": ["morryde"],
+          "response": "MORryde struggled to define their key differentiators with their diverse product lineup. We executed a comprehensive brand audit followed by an annual plan to roll out their new identity. This included strategic brand positioning and web design to showcase their metal fabrication expertise."
+        },
+        "decorative panels": {
+          "keywords": ["decorative panels", "dpi", "3d rendering"],
+          "response": "Decorative Panels International needed a modern website to showcase their decorative panel products and services. We delivered a highly visual and engaging design that included professional 3D scene rendering to beautifully showcase their products."
+        },
+        "horton": {
+          "keywords": ["horton", "ambulance"],
+          "response": "Horton, a premier ambulance manufacturer under the REV Group, needed to differentiate itself from seven sister ambulance brands. We helped them create a unique digital presence that reflects their commitment to quality and innovation in emergency vehicle manufacturing."
+        },
+        "champion": {
+          "keywords": ["champion", "rev group"],
+          "response": "Champion is known as the 'tough and dependable' brand under REV Group. We helped them build a website that reflects their rugged reputation and embodies their reliable brand identity in the transportation industry."
+        },
+        "collins bus": {
+          "keywords": ["collins bus", "type a bus"],
+          "response": "Collins Bus is the industry-leading Type A bus manufacturer. We were tasked with creating a modern digital presence that showcases their expertise and innovation in bus manufacturing, helping them maintain their market leadership position."
+        },
+        "renegade rv": {
+          "keywords": ["renegade rv"],
+          "response": "Driven to be different, Renegade RV needed a unique digital presence that reflects their innovative approach to RV design and manufacturing."
+        },
+        "braxton creek": {
+          "keywords": ["braxton creek"],
+          "response": "Putting the family experience first, Braxton Creek called on us to create a website that emphasizes their family-focused approach to RV manufacturing."
+        },
+        "capacity": {
+          "keywords": ["capacity", "yard trucks", "warranty"],
+          "response": "To launch its new industry-leading, 2-year warranty, Capacity, a manufacturer of yard trucks, turned to Rivulet IQ to launch a multi-media campaign, which included a lead-generating landing page and print ad."
+        },
+        "laymor": {
+          "keywords": ["laymor"],
+          "response": "A bit of a niche market, Laymor needed customers to understand their specialized products and services through a targeted digital approach."
+        },
+        "holistic pain management": {
+          "keywords": ["holistic pain management", "hpm"],
+          "response": "A quickly expanding service line, HPM needed a digital platform to support their growth and communicate their comprehensive approach to pain management."
+        },
+        "bob tebow": {
+          "keywords": ["bob tebow", "evangelistic association"],
+          "response": "Working hand-in-hand with our Rivulet design team, the Bob Tebow Evangelistic Association now has a website from which they can engage users from all over the country."
+        },
+        "road rescue": {
+          "keywords": ["road rescue"],
+          "response": "To help Road Rescue differentiate itself from its competitors, we created a unique digital identity that showcases their specialized emergency vehicle solutions."
+        },
+        "orgen family": {
+          "keywords": ["orgen family"],
+          "response": "Rivulet IQ helped deliver Orgen Family with a visually rich website designed to educate users and attract new leads."
+        },
+        "aev": {
+          "keywords": ["aev"],
+          "response": "To help AEV differentiate itself from its seven sister companies, we created a distinctive digital presence that highlights their unique value proposition."
+        },
+        "orgenetics": {
+          "keywords": ["orgenetics"],
+          "response": "Consumer education was the name of the game for Orgenetics. We built a platform that effectively communicates complex scientific information to their target audience."
+        },
+        "croa": {
+          "keywords": ["croa"],
+          "response": "Focused on lifestyle, fun, and photography that put users first, CROA needed a website that reflects their vibrant, user-centric approach."
+        },
+        "rev group": {
+          "keywords": ["rev group"],
+          "response": "With a one-year timeline, REV Group enlisted Rivulet to create a comprehensive digital solution for their diverse portfolio of companies."
+        },
+        "frontline": {
+          "keywords": ["frontline", "built like a tank"],
+          "response": "In order to differentiate itself from seven sister ambulance brands, Frontline tasked Rivulet IQ to design and develop its 'Built Like a Tank' website."
+        },
+        "eldorado": {
+          "keywords": ["eldorado", "enc"],
+          "response": "With seven other bus brands to compete with, ENC needed a digital strategy that sets them apart in the competitive bus manufacturing market."
+        },
+        "wheeled coach": {
+          "keywords": ["wheeled coach"],
+          "response": "Wheeled Coach, one of seven ambulance brands under REV Group, needed a digital presence that showcases their expertise in emergency vehicle manufacturing."
+        },
+        "heritage christian academy": {
+          "keywords": ["heritage christian academy"],
+          "response": "Rivulet IQ helped this faith-driven academy build a website that reflects their values and mission while effectively communicating with students and parents."
+        },
+        "safe fleet": {
+          "keywords": ["safe fleet", "configurator"],
+          "response": "Backed by plenty of testing and a hand-in-hand partnership, we created a Safe Fleet Configurator that helps customers customize their fleet solutions."
+        },
+        "holiday rambler": {
+          "keywords": ["holiday rambler"],
+          "response": "The Holiday Rambler website redesign put the brand's heritage and quality at the forefront, creating an engaging experience for RV enthusiasts."
+        },
+        "old town design build": {
+          "keywords": ["old town design build"],
+          "response": "Old Town Design Build needed a website that showcases their custom design and build services with a focus on quality craftsmanship."
+        },
+        "starcraft rv": {
+          "keywords": ["starcraft rv"],
+          "response": "In the process of reinventing its 100-year-old brand, Starcraft RV turned to us to create a modern digital presence that honors their heritage while embracing innovation."
+        },
+        "geringhoff": {
+          "keywords": ["geringhoff"],
+          "response": "Backed by plenty of testing and a hand-in-hand partnership, we helped Geringhoff create a digital platform that showcases their agricultural equipment expertise."
+        },
+        "bwc": {
+          "keywords": ["bwc"],
+          "response": "BWC needed a website that effectively communicates their services and expertise to their target market."
+        },
+        "ryder": {
+          "keywords": ["ryder", "vehicle maintenance"],
+          "response": "To promote REV Group's exclusive Ryder Vehicle Maintenance Program, we created a comprehensive digital campaign that highlights the program's benefits."
+        },
+        "gomadic": {
+          "keywords": ["gomadic"],
+          "response": "Gomadic needed a website that showcases their innovative charging and connectivity solutions for mobile devices."
+        },
+        "dometic": {
+          "keywords": ["dometic"],
+          "response": "Dometic required a digital platform that effectively presents their RV and marine products to customers and dealers."
+        },
+        "pace american": {
+          "keywords": ["pace american"],
+          "response": "To help generate qualified customer leads, Rivulet IQ created a targeted digital strategy for Pace American that focuses on their trailer and RV solutions."
+        },
+        "rv stove": {
+          "keywords": ["rv stove"],
+          "response": "RV Stove needed a website that showcases their specialized cooking solutions for the RV market."
+        },
+        "look trailers": {
+          "keywords": ["look trailers"],
+          "response": "To help generate qualified customer leads, Rivulet IQ developed a lead-generation focused website for Look Trailers."
+        },
+        "dellamoda": {
+          "keywords": ["dellamoda"],
+          "response": "Dellamoda needed a website that reflects their fashion-forward approach and showcases their products effectively."
+        },
+        "dutchmen 3d": {
+          "keywords": ["dutchmen 3d"],
+          "response": "Dutchmen 3D required a website that showcases their innovative 3D visualization capabilities for the RV industry."
+        },
+        "cuff daddy": {
+          "keywords": ["cuff daddy"],
+          "response": "Cuff Daddy needed a website that effectively presents their unique cufflink and accessory products to their target market."
+        },
+        "restaurant 3d": {
+          "keywords": ["restaurant 3d"],
+          "response": "Restaurant 3D required a website that showcases their 3D visualization services for the restaurant industry."
+        },
+        "millennium": {
+          "keywords": ["millennium"],
+          "response": "When you work with Millennium, you gain a partner committed to excellence. We helped them create a digital presence that reflects their partnership approach."
+        },
+        "liquidspring": {
+          "keywords": ["liquidspring", "smart suspension"],
+          "response": "LiquidSpring's Smart Suspension System evaluates speed, steering, braking and ride height 1,000x per second to automatically optimize your ride quality, handling characteristics, and peace of mind. We helped them communicate this innovative technology through their digital platform."
+        }
+      }
+    },
+    "ai": {
+      "keywords": ["ai", "artificial intelligence", "automation", "chatbot", "machine learning"],
+      "response": "We're an AI-first company! We offer AI Solutions including chatbots, AI search, automations, and data insights dashboards. We use OpenAI & GPT APIs, Google Vertex AI, LangChain & Pinecone, and custom integrations. AI helps us move faster, but our heart still beats for the craft."
+    },
+    "default": {
+      "response": "I'm here to help you learn about RivuletIQ! You can ask me about our services, process, pricing, technology, careers, portfolio, or anything else about our company. What would you like to know?"
+    }
+  },
+  "projectDiscussion": {
+    "starters": [
+      "Tell me about your project idea",
+      "What type of website do you need?",
+      "Are you looking for a web app or website?",
+      "Do you need eCommerce functionality?",
+      "Are you interested in AI features?"
+    ],
+    "questions": {
+      "website": [
+        "What's the main purpose of your website?",
+        "Who is your target audience?",
+        "Do you need a content management system?",
+        "What's your timeline for launch?"
+      ],
+      "webapp": [
+        "What functionality do you need?",
+        "How many users do you expect?",
+        "Do you need user authentication?",
+        "What integrations are required?"
+      ],
+      "ecommerce": [
+        "What products will you sell?",
+        "Do you need inventory management?",
+        "What payment methods do you want?",
+        "Do you need multi-currency support?"
+      ],
+      "ai": [
+        "What AI features are you interested in?",
+        "Do you need a chatbot?",
+        "Are you looking for automation?",
+        "What data do you want to analyze?"
+      ]
+    }
+  }
+}

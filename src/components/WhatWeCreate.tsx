@@ -7,6 +7,8 @@ import {
   Search,
   ArrowRight,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import AnimatedBackground from './AnimatedBackground';
 
 export default function WhatWeCreate() {
   const services = [
@@ -16,6 +18,7 @@ export default function WhatWeCreate() {
       description:
         'Brand identity, UX/UI design, and visual systems that capture attention and drive engagement.',
       tags: ['Branding', 'UI/UX', 'Design Systems'],
+      href: '/create/design',
     },
     {
       icon: Globe,
@@ -23,6 +26,7 @@ export default function WhatWeCreate() {
       description:
         'High-performance websites that blend stunning design with seamless functionality.',
       tags: ['Corporate Sites', 'Landing Pages', 'Portfolios'],
+      href: '/create/websites',
     },
     {
       icon: Cpu,
@@ -30,6 +34,7 @@ export default function WhatWeCreate() {
       description:
         'Scalable, secure applications built to grow with your business and delight your users.',
       tags: ['Dashboards', 'Platforms', 'Internal Tools'],
+      href: '/create/web-apps-saas',
     },
     {
       icon: ShoppingCart,
@@ -37,6 +42,7 @@ export default function WhatWeCreate() {
       description:
         'Conversion-optimized stores that turn browsers into buyers and buyers into loyal customers.',
       tags: ['Shopify', 'WooCommerce', 'Custom Solutions'],
+      href: '/create/ecommerce',
     },
     {
       icon: Brain,
@@ -44,6 +50,7 @@ export default function WhatWeCreate() {
       description:
         'Intelligent automation and AI-powered features that give you a competitive edge.',
       tags: ['Chatbots', 'ML Models', 'Automation'],
+      href: '/create/ai-solutions',
     },
     {
       icon: Search,
@@ -51,19 +58,20 @@ export default function WhatWeCreate() {
       description:
         'Deep-dive analysis to uncover opportunities and optimize your digital presence.',
       tags: ['UX Audits', 'Performance', 'SEO'],
+      href: '/create/audits',
     },
   ];
 
   return (
-    <section className="relative py-32 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="mb-6">
-            What We <span className="text-vivid-orange">Create</span>
+    <section className="relative py-32 px-6 overflow-hidden">
+      <AnimatedBackground particleCount={35} opacity={0.3} />
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-20">
+          <h2 className="mb-8">
+            We bring ideas to life through <span className="text-vivid-orange">design and technology</span>.
           </h2>
-          <p className="text-xl text-neutral-400 max-w-3xl mx-auto font-light">
-            End-to-end digital solutions crafted with precision, powered by
-            innovation, and designed to make an impact.
+          <p className="text-xl text-neutral-400 max-w-4xl mx-auto font-light leading-relaxed">
+            From responsive websites and high-performing web apps to seamless eCommerce and emerging AI solutions — our creations are crafted to move people and brands forward.
           </p>
         </div>
 
@@ -71,9 +79,10 @@ export default function WhatWeCreate() {
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div
+              <Link
                 key={index}
-                className="glass-panel glass-panel-hover p-8 group cursor-pointer relative overflow-hidden"
+                to={service.href}
+                className="glass-panel glass-panel-hover p-8 group cursor-pointer relative overflow-hidden block"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-vivid-orange/5 rounded-full blur-3xl transform translate-x-16 -translate-y-16 group-hover:bg-vivid-orange/10 transition-all duration-500" />
 
@@ -101,14 +110,20 @@ export default function WhatWeCreate() {
                     ))}
                   </div>
 
-                  <button className="flex items-center gap-2 text-vivid-orange font-medium group-hover:gap-4 transition-all">
+                  <div className="flex items-center gap-2 text-vivid-orange font-medium group-hover:gap-4 transition-all">
                     Learn More
                     <ArrowRight className="w-4 h-4" />
-                  </button>
+                  </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
+        </div>
+        
+        <div className="text-center mt-16">
+          <Link to="/create" className="btn-outline">
+            Explore What We Create
+          </Link>
         </div>
       </div>
     </section>

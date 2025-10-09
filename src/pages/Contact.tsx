@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import PageHero from '../components/shared/PageHero';
 import Section from '../components/shared/Section';
-import { Mail, MapPin, Calendar, Send } from 'lucide-react';
+import ResumeUpload from '../components/ResumeUpload';
+import { Mail, MapPin, Calendar, Send, Phone } from 'lucide-react';
 
 export default function Contact() {
   return (
@@ -21,44 +22,72 @@ export default function Contact() {
       <div className="py-20 px-6">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
           <div className="space-y-8">
-            <div className="glass-panel p-8">
-              <div className="w-14 h-14 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center mb-6">
-                <Calendar className="w-7 h-7 text-vivid-orange" />
-              </div>
-              <h3 className="text-2xl font-medium mb-4">Discovery Call</h3>
-              <p className="text-neutral-400 mb-6 leading-relaxed">
-                Schedule a short conversation with our team to explore your goals and see if we're the right fit.
-              </p>
-              <Link to="/contact" className="btn-primary inline-block">
-                Book a Call
-              </Link>
-            </div>
-
-            <div className="glass-panel p-8">
-              <div className="w-14 h-14 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center mb-6">
-                <Mail className="w-7 h-7 text-vivid-orange" />
-              </div>
-              <h3 className="text-2xl font-medium mb-4">Email</h3>
-              <p className="text-neutral-400 mb-6 leading-relaxed">
-                Prefer to write it out? Send us a note — we respond within 1 business day.
-              </p>
-              <a href="mailto:hello@rivuletiq.com" className="text-vivid-orange hover:underline text-lg">
-                hello@rivuletiq.com
-              </a>
-            </div>
-
-            <div className="glass-panel p-8">
-              <div className="w-14 h-14 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center mb-6">
-                <Send className="w-7 h-7 text-vivid-orange" />
-              </div>
-              <h3 className="text-2xl font-medium mb-4">Careers</h3>
-              <p className="text-neutral-400 mb-6 leading-relaxed">
-                Interested in joining the team?
-              </p>
-              <a href="mailto:careers@rivuletiq.com" className="text-vivid-orange hover:underline text-lg">
-                careers@rivuletiq.com
-              </a>
-            </div>
+            {[
+              {
+                icon: Calendar,
+                title: 'Discovery Call',
+                description: 'Schedule a short conversation with our team to explore your goals and see if we\'re the right fit.',
+                action: { type: 'link', text: 'Book a Call', href: '/contact' }
+              },
+              {
+                icon: Mail,
+                title: 'Email',
+                description: 'Prefer to write it out? Send us a note — we respond within 1 business day.',
+                action: { type: 'email', text: 'contact@rivuletiq.com', href: 'mailto:contact@rivuletiq.com' }
+              },
+              {
+                icon: Phone,
+                title: 'Phone',
+                description: 'Give us a call to discuss your project.',
+                action: { type: 'phone', text: '+91 879 922 5285', href: 'tel:+918799225285' }
+              },
+              {
+                icon: Send,
+                title: 'Careers',
+                description: 'Interested in joining the team?',
+                action: { type: 'email', text: 'hr@rivuletiq.com', href: 'mailto:hr@rivuletiq.com' }
+              }
+            ].map((contact, index) => {
+              const Icon = contact.icon;
+              return (
+                <div key={index} className="group relative">
+                  <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                    {/* Background Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    {/* Icon Container */}
+                    <div className="relative z-10 mb-6">
+                      <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                        <Icon className="w-8 h-8 text-vivid-orange" />
+                      </div>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-vivid-orange transition-colors">{contact.title}</h3>
+                      <p className="text-neutral-300 mb-6 leading-relaxed group-hover:text-neutral-200 transition-colors">
+                        {contact.description}
+                      </p>
+                      {contact.action.type === 'link' ? (
+                        <Link to={contact.action.href} className="btn-primary inline-block group-hover:bg-vivid-orange/90 transition-colors">
+                          {contact.action.text}
+                        </Link>
+                      ) : (
+                        <a href={contact.action.href} className="text-vivid-orange hover:underline text-lg font-medium group-hover:text-vivid-orange/80 transition-colors">
+                          {contact.action.text}
+                        </a>
+                      )}
+                    </div>
+                    
+                    {/* Hover Effect Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    {/* Bottom Accent Line */}
+                    <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           <div className="glass-panel p-8 lg:p-10">
@@ -121,23 +150,19 @@ export default function Contact() {
         </div>
       </div>
 
+      {/* Resume Upload Section */}
       <Section
-        headline="We call Ahmedabad home."
-        subheadline="Our Space"
-        copy="Our studio is built around light, conversation, and creativity — a space where ideas move freely and work feels personal."
+        headline="Ready to join our team?"
+        subheadline="Send Your Resume"
+        copy="Upload your resume and we'll help you send it directly to our HR team. We're always looking for talented individuals to join our creative journey."
         centered
         className="bg-white/5"
       >
-        <div className="flex items-center justify-center gap-3 mt-6">
-          <MapPin className="w-5 h-5 text-vivid-orange" />
-          <p className="text-neutral-300">
-            Iscon Platinum, Bopal, Ahmedabad, Gujarat, India
-          </p>
+        <div className="max-w-2xl mx-auto">
+          <ResumeUpload />
         </div>
-        <p className="text-neutral-400 mt-4">
-          Drop by for a coffee, a chat, or a brainstorming session.
-        </p>
       </Section>
+
     </>
   );
 }

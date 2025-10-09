@@ -3,6 +3,11 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
+import ScrollbarEnhancer from './components/ScrollbarEnhancer';
+import PageLoadAnimation from './components/PageLoadAnimation';
+import AudioManager from './components/AudioManager';
+import Chatbot from './components/Chatbot';
 import Home from './pages/Home';
 import WhatWeCreatePage from './pages/WhatWeCreate';
 import DesignCreative from './pages/create/DesignCreative';
@@ -15,6 +20,7 @@ import HowWeDeliver from './pages/HowWeDeliver';
 import WaysToWork from './pages/WaysToWork';
 import TechTools from './pages/TechTools';
 import About from './pages/About';
+import Portfolio from './pages/Portfolio';
 import OpenRoles from './pages/careers/OpenRoles';
 import LifeGrowth from './pages/careers/LifeGrowth';
 import Learning from './pages/careers/Learning';
@@ -34,7 +40,11 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="min-h-screen">
+      <PageLoadAnimation />
+      <AudioManager />
+      <CustomCursor />
+      <ScrollbarEnhancer />
+      <div className="min-h-screen bg-black">
         <Header />
         <main>
           <Routes>
@@ -50,6 +60,7 @@ function App() {
             <Route path="/engage" element={<WaysToWork />} />
             <Route path="/tech" element={<TechTools />} />
             <Route path="/about" element={<About />} />
+            <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/careers/open-roles" element={<OpenRoles />} />
             <Route path="/careers/life-growth" element={<LifeGrowth />} />
             <Route path="/careers/learning" element={<Learning />} />
@@ -58,8 +69,9 @@ function App() {
         </main>
         <Footer />
       </div>
+      <Chatbot />
     </BrowserRouter>
   );
 }
 
-export default App;
+    export default App;
