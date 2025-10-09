@@ -15,11 +15,81 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isScrollSoundEnabled, setIsScrollSoundEnabled] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const lastScrollTimeRef = useRef<number>(0);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Initialize Web Audio API
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.AudioContext) {
+      audioContextRef.current = new AudioContext();
+    }
+  }, []);
+
+  // Scroll Symphony - Ambient sound design
+  const playScrollSound = (direction: 'up' | 'down', intensity: number = 0.3) => {
+    if (!isScrollSoundEnabled || !audioContextRef.current) return;
+    
+    const now = Date.now();
+    if (now - lastScrollTimeRef.current < 50) return; // Throttle sounds
+    lastScrollTimeRef.current = now;
+
+    const audioContext = audioContextRef.current;
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    // Connect nodes
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // Configure sound based on direction and intensity
+    const baseFreq = direction === 'up' ? 200 : 150;
+    const frequency = baseFreq + (intensity * 100);
+    
+    oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+    oscillator.type = 'sine';
+    
+    // Create ambient, whisper-like effect
+    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+    gainNode.gain.linearRampToValueAtTime(intensity * 0.1, audioContext.currentTime + 0.05);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.3);
+    
+    // Add subtle vibrato for organic feel
+    const vibrato = audioContext.createOscillator();
+    const vibratoGain = audioContext.createGain();
+    vibrato.frequency.setValueAtTime(4, audioContext.currentTime);
+    vibratoGain.gain.setValueAtTime(2, audioContext.currentTime);
+    vibrato.connect(vibratoGain);
+    vibratoGain.connect(oscillator.frequency);
+    
+    // Play the sound
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.3);
+    vibrato.start(audioContext.currentTime);
+    vibrato.stop(audioContext.currentTime + 0.3);
+  };
+
+  // Handle scroll events
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLDivElement;
+    const scrollTop = target.scrollTop;
+    const scrollHeight = target.scrollHeight;
+    const clientHeight = target.clientHeight;
+    
+    // Calculate scroll intensity (0-1)
+    const scrollProgress = scrollTop / (scrollHeight - clientHeight);
+    const intensity = Math.min(scrollProgress * 2, 1);
+    
+    // Determine scroll direction and play sound
+    if (scrollTop > 0) {
+      playScrollSound('down', intensity);
+    }
   };
 
   useEffect(() => {
@@ -139,44 +209,99 @@ export default function Chatbot() {
         : 'bottom-0 right-0 sm:bottom-6 sm:right-6 w-full sm:w-96 h-[100dvh] sm:h-[600px] sm:max-h-[calc(100vh-3rem)]'
     }`}>
        <div className="bg-black h-full flex flex-col shadow-2xl border border-white/10 sm:rounded-2xl overflow-hidden">
-         <div className="flex items-center justify-between p-4 border-b border-white/10 bg-black">
-           <div className="flex items-center gap-3">
-             <div className="w-10 h-10 rounded-full bg-vivid-orange flex items-center justify-center">
-               <Bot className="w-5 h-5 text-white" />
+         <div className={`flex items-center justify-between bg-black transition-all duration-300 ${
+           isMinimized 
+             ? 'p-3 h-16' 
+             : 'p-3 sm:p-4 border-b border-white/10'
+         }`}>
+           <div className="flex items-center gap-2 sm:gap-3">
+             <div className={`rounded-full bg-vivid-orange flex items-center justify-center ${
+               isMinimized 
+                 ? 'w-8 h-8' 
+                 : 'w-8 h-8 sm:w-10 sm:h-10'
+             }`}>
+               <Bot className={`text-white ${
+                 isMinimized 
+                   ? 'w-4 h-4' 
+                   : 'w-4 h-4 sm:w-5 sm:h-5'
+               }`} />
              </div>
-             <div>
-               <h3 className="font-bold text-white text-lg tracking-wide">RivuletIQ Assistant</h3>
-               <p className="text-xs text-neutral-400 flex items-center gap-1">
-                 <span className="w-2 h-2 bg-vivid-orange rounded-full animate-pulse"></span>
-                 Online
-               </p>
-             </div>
-           </div>
-           <div className="flex items-center gap-2">
-             <button
-               onClick={() => setIsMinimized(!isMinimized)}
-               className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-               aria-label={isMinimized ? "Maximize" : "Minimize"}
-             >
-               {isMinimized ? (
-                 <Maximize2 className="w-4 h-4 text-neutral-400" />
-               ) : (
-                 <Minimize2 className="w-4 h-4 text-neutral-400" />
+             <div className={isMinimized ? 'hidden sm:block' : ''}>
+               <h3 className={`font-bold text-white tracking-wide ${
+                 isMinimized 
+                   ? 'text-sm' 
+                   : 'text-base sm:text-lg md:text-xl'
+               }`}>
+                 {isMinimized ? 'RivuletIQ' : 'RivuletIQ Assistant'}
+               </h3>
+               {!isMinimized && (
+                 <p className="text-xs sm:text-sm text-neutral-400 flex items-center gap-1">
+                   <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-vivid-orange rounded-full animate-pulse"></span>
+                   Online
+                 </p>
                )}
-             </button>
-             <button
-               onClick={() => setIsOpen(false)}
-               className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-               aria-label="Close"
-             >
-               <X className="w-4 h-4 text-neutral-400" />
-             </button>
+             </div>
            </div>
+             <div className="flex items-center gap-1 sm:gap-2">
+               {!isMinimized && (
+                 <button
+                   onClick={() => setIsScrollSoundEnabled(!isScrollSoundEnabled)}
+                   className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
+                     isScrollSoundEnabled 
+                       ? 'hover:bg-white/10 text-vivid-orange' 
+                       : 'hover:bg-white/10 text-neutral-400'
+                   }`}
+                   aria-label={isScrollSoundEnabled ? "Disable scroll sounds" : "Enable scroll sounds"}
+                   title={isScrollSoundEnabled ? "Scroll Symphony ON" : "Scroll Symphony OFF"}
+                 >
+                   <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
+                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                   </svg>
+                 </button>
+               )}
+               <button
+                 onClick={() => setIsMinimized(!isMinimized)}
+                 className={`rounded-lg transition-colors ${
+                   isMinimized 
+                     ? 'p-2 hover:bg-white/10' 
+                     : 'p-1.5 sm:p-2 hover:bg-white/10'
+                 }`}
+                 aria-label={isMinimized ? "Maximize" : "Minimize"}
+               >
+                 {isMinimized ? (
+                   <Maximize2 className={`text-neutral-400 ${
+                     isMinimized 
+                       ? 'w-4 h-4' 
+                       : 'w-3.5 h-3.5 sm:w-4 sm:h-4'
+                   }`} />
+                 ) : (
+                   <Minimize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neutral-400" />
+                 )}
+               </button>
+               <button
+                 onClick={() => setIsOpen(false)}
+                 className={`rounded-lg transition-colors ${
+                   isMinimized 
+                     ? 'p-2 hover:bg-white/10' 
+                     : 'p-1.5 sm:p-2 hover:bg-white/10'
+                 }`}
+                 aria-label="Close"
+               >
+                 <X className={`text-neutral-400 ${
+                   isMinimized 
+                     ? 'w-4 h-4' 
+                     : 'w-3.5 h-3.5 sm:w-4 sm:h-4'
+                 }`} />
+               </button>
+             </div>
         </div>
 
         {!isMinimized && (
           <>
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-black">
+            <div 
+              className="flex-1 overflow-y-auto p-4 space-y-4 bg-black"
+              onScroll={handleScroll}
+            >
               {messages.map((message) => (
                 <div
                   key={message.id}
