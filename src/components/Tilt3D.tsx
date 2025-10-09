@@ -1,4 +1,4 @@
-import { ReactNode, useRef, MouseEvent } from 'react';
+import { ReactNode, useRef, MouseEvent, useEffect, useState } from 'react';
 
 interface Tilt3DProps {
   children: ReactNode;
@@ -8,9 +8,21 @@ interface Tilt3DProps {
 
 export default function Tilt3D({ children, className = '', intensity = 15 }: Tilt3DProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
+    if (!cardRef.current || isMobile) return;
 
     const card = cardRef.current;
     const rect = card.getBoundingClientRect();
@@ -28,7 +40,7 @@ export default function Tilt3D({ children, className = '', intensity = 15 }: Til
   };
 
   const handleMouseLeave = () => {
-    if (!cardRef.current) return;
+    if (!cardRef.current || isMobile) return;
     cardRef.current.style.setProperty('--rotate-x', '0deg');
     cardRef.current.style.setProperty('--rotate-y', '0deg');
   };

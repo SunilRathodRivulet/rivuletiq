@@ -118,11 +118,11 @@ export default function DesignCreative() {
         <div className="relative mt-16">
           {/* Timeline Container */}
           <div className="relative max-w-6xl mx-auto">
-            {/* Main Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-vivid-orange via-vivid-orange/60 to-vivid-orange/30 rounded-full timeline-line"></div>
+            {/* Main Timeline Line - Hidden on mobile */}
+            <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-vivid-orange via-vivid-orange/60 to-vivid-orange/30 rounded-full timeline-line"></div>
             
             {/* Timeline Nodes */}
-            <div className="space-y-24">
+            <div className="space-y-12 lg:space-y-24">
               {process.map((step, index) => {
                 const Icon = step.icon;
                 const isEven = index % 2 === 0;
@@ -130,7 +130,7 @@ export default function DesignCreative() {
                 return (
                   <div key={step.number} className="relative" style={{ animationDelay: `${index * 0.2}s` }}>
                     {/* Timeline Node */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2 z-10">
+                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2 z-10 hidden lg:block">
                       <div className="w-16 h-16 rounded-full bg-vivid-orange/20 border-4 border-vivid-orange/40 flex items-center justify-center backdrop-blur-sm timeline-node">
                         <Icon className="w-8 h-8 text-vivid-orange" />
                       </div>
@@ -138,22 +138,29 @@ export default function DesignCreative() {
                       <div className="absolute inset-0 w-16 h-16 rounded-full bg-vivid-orange/10 animate-pulse"></div>
                     </div>
                     
+                    {/* Mobile Timeline Node */}
+                    <div className="lg:hidden flex items-center justify-center mb-6">
+                      <div className="w-12 h-12 rounded-full bg-vivid-orange/20 border-4 border-vivid-orange/40 flex items-center justify-center backdrop-blur-sm">
+                        <Icon className="w-6 h-6 text-vivid-orange" />
+                      </div>
+                    </div>
+                    
                     {/* Content Card */}
                     <div className={`flex items-center ${isEven ? 'justify-start' : 'justify-end'}`}>
-                      <div className={`w-5/12 ${isEven ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                        <div className={`glass-panel p-8 relative group hover:scale-105 transition-all duration-300 ${isEven ? 'timeline-card-left' : 'timeline-card-right'}`} style={{ animationDelay: `${index * 0.3}s` }}>
+                      <div className={`w-full lg:w-5/12 ${isEven ? 'lg:pr-8 lg:text-right' : 'lg:pl-8 lg:text-left'}`}>
+                        <div className={`glass-panel p-6 lg:p-8 relative group hover:scale-105 transition-all duration-300 ${isEven ? 'timeline-card-left' : 'timeline-card-right'}`} style={{ animationDelay: `${index * 0.3}s` }}>
                           {/* Step Number Badge */}
-                          <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-vivid-orange flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                          <div className="absolute -top-3 -right-3 lg:-top-4 lg:-right-4 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-vivid-orange flex items-center justify-center text-white font-bold text-sm lg:text-lg shadow-lg">
                             {step.number}
                           </div>
                           
-                          {/* Connection Line to Node */}
-                          <div className={`absolute top-1/2 -translate-y-1/2 w-8 h-0.5 bg-vivid-orange/30 ${isEven ? '-right-8' : '-left-8'}`}></div>
+                          {/* Connection Line to Node - Hidden on mobile */}
+                          <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 w-8 h-0.5 bg-vivid-orange/30 ${isEven ? '-right-8' : '-left-8'}`}></div>
                           
-                          <h4 className="text-2xl font-bold mb-4 text-vivid-orange group-hover:text-vivid-orange/80 transition-colors">
+                          <h4 className="text-xl lg:text-2xl font-bold mb-3 lg:mb-4 text-vivid-orange group-hover:text-vivid-orange/80 transition-colors">
                             {step.title}
                           </h4>
-                          <p className="text-neutral-300 leading-relaxed text-lg">
+                          <p className="text-neutral-300 leading-relaxed text-base lg:text-lg">
                             {step.description}
                           </p>
                           

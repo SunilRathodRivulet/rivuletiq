@@ -3,34 +3,55 @@ import { useEffect, useRef, useState } from 'react';
 export default function AudioManager() {
   const [isEnabled, setIsEnabled] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isUserInteracted, setIsUserInteracted] = useState(false);
   const audioContextRef = useRef<AudioContext | null>(null);
   const lastScrollTimeRef = useRef<number>(0);
   const lastClickTimeRef = useRef<number>(0);
   const scrollDirectionRef = useRef<'up' | 'down'>('down');
   const lastScrollYRef = useRef<number>(0);
 
-  // Initialize AudioContext on user interaction
+  // Initialize AudioContext only after user interaction
   useEffect(() => {
-    const initializeAudio = () => {
-      if (typeof window !== 'undefined' && window.AudioContext && !audioContextRef.current) {
-        try {
-          audioContextRef.current = new AudioContext();
-          setIsInitialized(true);
-        } catch (error) {
-          console.warn('AudioContext initialization failed:', error);
+    const initializeAudio = async () => {
+      if (typeof window === 'undefined' || !window.AudioContext) {
+        console.warn('AudioContext not supported in this browser');
+        return;
+      }
+
+      if (audioContextRef.current) {
+        return; // Already initialized
+      }
+
+      try {
+        audioContextRef.current = new AudioContext();
+        
+        // Check if the context is suspended and resume it
+        if (audioContextRef.current.state === 'suspended') {
+          await audioContextRef.current.resume();
         }
+        
+        setIsInitialized(true);
+        console.log('AudioContext initialized successfully');
+      } catch (error) {
+        console.warn('AudioContext initialization failed:', error);
+        audioContextRef.current = null;
+        setIsInitialized(false);
       }
     };
 
-    // Initialize on first user interaction
-    const handleUserInteraction = () => {
-      initializeAudio();
-      // Remove listeners after first interaction
-      document.removeEventListener('click', handleUserInteraction);
-      document.removeEventListener('keydown', handleUserInteraction);
-      document.removeEventListener('scroll', handleUserInteraction);
-      document.removeEventListener('touchstart', handleUserInteraction);
-      document.removeEventListener('mousedown', handleUserInteraction);
+    // Handle user interaction to initialize audio
+    const handleUserInteraction = async () => {
+      if (!isUserInteracted) {
+        setIsUserInteracted(true);
+        await initializeAudio();
+        
+        // Remove listeners after first interaction
+        document.removeEventListener('click', handleUserInteraction);
+        document.removeEventListener('keydown', handleUserInteraction);
+        document.removeEventListener('scroll', handleUserInteraction);
+        document.removeEventListener('touchstart', handleUserInteraction);
+        document.removeEventListener('mousedown', handleUserInteraction);
+      }
     };
 
     // Add listeners for various user interactions
@@ -47,24 +68,37 @@ export default function AudioManager() {
       document.removeEventListener('touchstart', handleUserInteraction);
       document.removeEventListener('mousedown', handleUserInteraction);
     };
-  }, []);
+  }, [isUserInteracted]);
 
-  // Resume AudioContext if suspended
-  const ensureAudioContext = async () => {
-    if (audioContextRef.current && audioContextRef.current.state === 'suspended') {
-      try {
+  // Ensure AudioContext is ready and resumed
+  const ensureAudioContext = async (): Promise<boolean> => {
+    if (!isUserInteracted) {
+      console.warn('AudioContext cannot be used before user interaction');
+      return false;
+    }
+
+    if (!audioContextRef.current) {
+      console.warn('AudioContext not initialized');
+      return false;
+    }
+
+    try {
+      if (audioContextRef.current.state === 'suspended') {
         await audioContextRef.current.resume();
-      } catch (error) {
-        console.warn('Failed to resume AudioContext:', error);
       }
+      return audioContextRef.current.state === 'running';
+    } catch (error) {
+      console.warn('Failed to resume AudioContext:', error);
+      return false;
     }
   };
 
   // Scroll Symphony - Ambient sound design
   const playScrollSound = async (direction: 'up' | 'down', intensity: number = 0.3, speed: number = 1) => {
-    if (!isEnabled || !isInitialized || !audioContextRef.current) return;
+    if (!isEnabled || !isInitialized) return;
     
-    await ensureAudioContext();
+    const isAudioReady = await ensureAudioContext();
+    if (!isAudioReady || !audioContextRef.current) return;
     
     const now = Date.now();
     if (now - lastScrollTimeRef.current < 100) return; // Throttle sounds
@@ -116,9 +150,10 @@ export default function AudioManager() {
 
   // Button click sound
   const playClickSound = async (buttonType: 'primary' | 'secondary' | 'ghost' = 'primary') => {
-    if (!isEnabled || !isInitialized || !audioContextRef.current) return;
+    if (!isEnabled || !isInitialized) return;
     
-    await ensureAudioContext();
+    const isAudioReady = await ensureAudioContext();
+    if (!isAudioReady || !audioContextRef.current) return;
     
     const now = Date.now();
     if (now - lastClickTimeRef.current < 50) return; // Throttle sounds
@@ -171,9 +206,10 @@ export default function AudioManager() {
 
   // Website launch sound
   const playLaunchSound = async () => {
-    if (!isInitialized || !audioContextRef.current) return;
+    if (!isInitialized) return;
     
-    await ensureAudioContext();
+    const isAudioReady = await ensureAudioContext();
+    if (!isAudioReady || !audioContextRef.current) return;
     
     const audioContext = audioContextRef.current;
     
@@ -216,7 +252,7 @@ export default function AudioManager() {
 
   // Handle scroll events
   const handleScroll = () => {
-    if (!isInitialized) return;
+    if (!isInitialized || !isUserInteracted) return;
     
     const scrollY = window.scrollY;
     const scrollHeight = document.documentElement.scrollHeight;
@@ -242,18 +278,18 @@ export default function AudioManager() {
 
   // Add scroll event listener
   useEffect(() => {
-    if (!isInitialized) return;
+    if (!isInitialized || !isUserInteracted) return;
     
     window.addEventListener('scroll', handleScroll, { passive: true });
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isInitialized]);
+  }, [isInitialized, isUserInteracted]);
 
   // Add click listeners to all buttons
   useEffect(() => {
-    if (!isInitialized) return;
+    if (!isInitialized || !isUserInteracted) return;
     
     const handleButtonClick = (e: Event) => {
       const target = e.target as HTMLElement;
@@ -283,7 +319,7 @@ export default function AudioManager() {
     return () => {
       document.removeEventListener('click', handleButtonClick, true);
     };
-  }, [isInitialized]);
+  }, [isInitialized, isUserInteracted]);
 
   // Keyboard shortcut to toggle all sounds
   useEffect(() => {
@@ -300,6 +336,8 @@ export default function AudioManager() {
 
   // Expose audio functions globally for other components
   useEffect(() => {
+    if (!isInitialized || !isUserInteracted) return;
+    
     (window as any).playLaunchSound = playLaunchSound;
     (window as any).playScrollSound = playScrollSound;
     (window as any).playClickSound = playClickSound;
@@ -309,7 +347,7 @@ export default function AudioManager() {
       delete (window as any).playScrollSound;
       delete (window as any).playClickSound;
     };
-  }, [isInitialized]);
+  }, [isInitialized, isUserInteracted]);
 
   // Don't render anything visible - this is just for audio
   return null;

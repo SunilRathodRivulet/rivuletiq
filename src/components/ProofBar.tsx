@@ -84,8 +84,8 @@ export default function ProofBar() {
             Behind every number, there's a story of collaboration, curiosity, and craft.
           </p>
         </div>
-        <div className="glass-panel p-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="glass-panel p-6 sm:p-8 lg:p-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (

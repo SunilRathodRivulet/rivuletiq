@@ -75,7 +75,7 @@ export default function WhatWeCreate() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -87,11 +87,11 @@ export default function WhatWeCreate() {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-vivid-orange/5 rounded-full blur-3xl transform translate-x-16 -translate-y-16 group-hover:bg-vivid-orange/10 transition-all duration-500" />
 
                 <div className="relative z-10">
-                  <div className="w-14 h-14 mb-6 rounded-2xl bg-vivid-orange/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="w-7 h-7 text-vivid-orange" />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 mb-4 sm:mb-6 rounded-2xl bg-vivid-orange/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-vivid-orange" />
                   </div>
 
-                  <h3 className="text-2xl mb-3 group-hover:text-vivid-orange transition-colors">
+                  <h3 className="text-xl sm:text-2xl mb-3 group-hover:text-vivid-orange transition-colors">
                     {service.title}
                   </h3>
 
@@ -99,11 +99,11 @@ export default function WhatWeCreate() {
                     {service.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
                     {service.tags.map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
-                        className="text-xs px-3 py-1 rounded-full bg-white/5 text-neutral-300 border border-white/10"
+                        className="text-xs px-2 sm:px-3 py-1 rounded-full bg-white/5 text-neutral-300 border border-white/10"
                       >
                         {tag}
                       </span>
