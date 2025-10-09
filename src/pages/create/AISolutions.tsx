@@ -1,7 +1,7 @@
 import PageHero from '../../components/shared/PageHero';
 import Section from '../../components/shared/Section';
 import CTASection from '../../components/shared/CTASection';
-import { MessageSquare, Search, Workflow, BarChart } from 'lucide-react';
+import { MessageSquare, Search, Workflow, BarChart, Target, Shield, Palette, Plug } from 'lucide-react';
 
 export default function AISolutions() {
   const services = [
@@ -28,11 +28,11 @@ export default function AISolutions() {
   ];
 
   const technologies = [
-    { name: 'OpenAI & GPT APIs', description: 'Conversational intelligence and content generation.' },
-    { name: 'Google Vertex AI / Dialogflow', description: 'Natural language processing and automation.' },
-    { name: 'LangChain & Pinecone', description: 'Vector search and contextual memory for smarter retrieval.' },
-    { name: 'ElasticSearch / Algolia', description: 'Search and relevance optimization.' },
-    { name: 'Custom Integrations', description: 'Connecting AI with CMS, CRMs, and analytics pipelines.' },
+    { name: 'OpenAI & GPT APIs', description: 'Conversational intelligence and content generation.', icon: MessageSquare },
+    { name: 'Google Vertex AI / Dialogflow', description: 'Natural language processing and automation.', icon: Workflow },
+    { name: 'LangChain & Pinecone', description: 'Vector search and contextual memory for smarter retrieval.', icon: Search },
+    { name: 'ElasticSearch / Algolia', description: 'Search and relevance optimization.', icon: BarChart },
+    { name: 'Custom Integrations', description: 'Connecting AI with CMS, CRMs, and analytics pipelines.', icon: Plug },
   ];
 
   return (
@@ -50,19 +50,37 @@ export default function AISolutions() {
         centered
       />
 
-      <Section headline="From conversations to connections." subheadline="What We Build" centered>
-        <div className="grid md:grid-cols-2 gap-8 mt-12 max-w-5xl mx-auto">
-          {services.map((service) => {
+      <Section headline="From conversations to connections." subheadline="What We Build" centered className="bg-white/5">
+        <div className="grid md:grid-cols-2 gap-8 mt-16 max-w-6xl mx-auto">
+          {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div key={service.title} className="glass-panel p-8">
-                <div className="w-14 h-14 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center mb-6">
-                  <Icon className="w-7 h-7 text-vivid-orange" />
+              <div key={service.title} className="group relative">
+                <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                  {/* Background Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Icon Container */}
+                  <div className="relative z-10 mb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                      <Icon className="w-8 h-8 text-vivid-orange" />
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h3 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">{service.title}</h3>
+                    <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">
+                      {service.description}
+                    </p>
+                  </div>
+                  
+                  {/* Hover Effect Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Bottom Accent Line */}
+                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
                 </div>
-                <h3 className="text-xl font-medium mb-3">{service.title}</h3>
-                <p className="text-neutral-400 font-light leading-relaxed">
-                  {service.description}
-                </p>
               </div>
             );
           })}
@@ -75,36 +93,98 @@ export default function AISolutions() {
         copy="We don't chase trends — we design with intention. Every AI solution starts with a clear problem, a human use case, and a design framework that ensures transparency, privacy, and usability."
         className="bg-white/5"
       >
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
           {[
-            'Clear user goals before model selection',
-            'Ethical data usage and privacy compliance',
-            'Design-led approach to conversational UX',
-            'Integration with existing systems (APIs, CRMs, CMS)',
-          ].map((point) => (
-            <div key={point} className="glass-panel p-6">
-              <svg className="w-6 h-6 text-vivid-orange mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              <p className="text-neutral-300 text-sm">{point}</p>
-            </div>
-          ))}
+            {
+              title: 'Clear User Goals',
+              description: 'Clear user goals before model selection',
+              icon: Target
+            },
+            {
+              title: 'Ethical Data Usage',
+              description: 'Ethical data usage and privacy compliance',
+              icon: Shield
+            },
+            {
+              title: 'Design-Led Approach',
+              description: 'Design-led approach to conversational UX',
+              icon: Palette
+            },
+            {
+              title: 'System Integration',
+              description: 'Integration with existing systems (APIs, CRMs, CMS)',
+              icon: Plug
+            }
+          ].map((point, index) => {
+            const Icon = point.icon;
+            return (
+              <div key={index} className="group relative">
+                <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                  {/* Background Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Icon Container */}
+                  <div className="relative z-10 mb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                      <Icon className="w-8 h-8 text-vivid-orange" />
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h4 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">{point.title}</h4>
+                    <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">{point.description}</p>
+                  </div>
+                  
+                  {/* Hover Effect Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Bottom Accent Line */}
+                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </Section>
 
-      <Section headline="Intelligence meets infrastructure." subheadline="Technology We Use" centered>
-        <p className="text-neutral-300 max-w-3xl mx-auto mb-12">
+      <Section headline="Intelligence meets infrastructure." subheadline="Technology We Use" centered className="bg-white/5">
+        <p className="text-neutral-300 max-w-3xl mx-auto mb-16">
           Our AI stack integrates open frameworks, APIs, and cloud systems — built to scale across real-world use cases.
         </p>
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {technologies.map((tech) => (
-            <div key={tech.name} className="glass-panel p-6">
-              <h4 className="text-lg font-medium mb-2 text-vivid-orange">{tech.name}</h4>
-              <p className="text-neutral-400 text-sm font-light">{tech.description}</p>
-            </div>
-          ))}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {technologies.map((tech, index) => {
+            const Icon = tech.icon;
+            return (
+              <div key={tech.name} className="group relative">
+                <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                  {/* Background Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Icon Container */}
+                  <div className="relative z-10 mb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                      <Icon className="w-8 h-8 text-vivid-orange" />
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h4 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">{tech.name}</h4>
+                    <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">{tech.description}</p>
+                  </div>
+                  
+                  {/* Hover Effect Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Bottom Accent Line */}
+                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
+                </div>
+              </div>
+            );
+          })}
         </div>
-        <p className="text-neutral-500 text-sm mt-12 max-w-3xl mx-auto">
+        <p className="text-neutral-500 text-sm mt-16 max-w-3xl mx-auto text-center">
           We don't build "black boxes." We build transparent, adaptable AI layers that integrate into your existing ecosystem.
         </p>
       </Section>

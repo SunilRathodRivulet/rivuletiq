@@ -1,37 +1,38 @@
 import PageHero from '../components/shared/PageHero';
 import Section from '../components/shared/Section';
 import CTASection from '../components/shared/CTASection';
+import { Database, Code, ShoppingCart, Palette, Calendar, GitCommit, Monitor, MessageSquare } from 'lucide-react';
 
 export default function TechTools() {
   const cms = [
-    { name: 'WordPress', desc: 'Custom themes, block-based editing, and long-term scalability.' },
-    { name: 'Craft CMS', desc: 'Lightweight, secure, and ideal for design-forward content sites.' },
-    { name: 'Drupal', desc: 'Enterprise-grade content systems with complex user management.' },
-    { name: 'Joomla', desc: 'Robust structure for community or multilingual sites.' },
+    { name: 'WordPress', desc: 'Custom themes, block-based editing, and long-term scalability.', icon: Database },
+    { name: 'Craft CMS', desc: 'Lightweight, secure, and ideal for design-forward content sites.', icon: Database },
+    { name: 'Drupal', desc: 'Enterprise-grade content systems with complex user management.', icon: Database },
+    { name: 'Joomla', desc: 'Robust structure for community or multilingual sites.', icon: Database },
   ];
 
   const customDev = [
-    { name: 'Laravel', desc: 'Elegant PHP framework for secure, scalable backends.' },
-    { name: 'Vue.js', desc: 'Reactive front-end for fluid user interactions.' },
-    { name: 'React.js', desc: 'Dynamic interfaces built for speed and reusability.' },
-    { name: 'Ruby', desc: 'Reliable and efficient for structured web applications.' },
-    { name: 'Python', desc: 'Perfect for automation, AI integrations, and data-rich platforms.' },
-    { name: 'Node.js', desc: 'Event-driven architecture for real-time experiences.' },
+    { name: 'Laravel', desc: 'Elegant PHP framework for secure, scalable backends.', icon: Code },
+    { name: 'Vue.js', desc: 'Reactive front-end for fluid user interactions.', icon: Code },
+    { name: 'React.js', desc: 'Dynamic interfaces built for speed and reusability.', icon: Code },
+    { name: 'Ruby', desc: 'Reliable and efficient for structured web applications.', icon: Code },
+    { name: 'Python', desc: 'Perfect for automation, AI integrations, and data-rich platforms.', icon: Code },
+    { name: 'Node.js', desc: 'Event-driven architecture for real-time experiences.', icon: Code },
   ];
 
   const ecommerce = [
-    { name: 'Shopify', desc: 'Fast, secure, and perfect for growing brands.' },
-    { name: 'WooCommerce', desc: 'Ideal for content + commerce experiences.' },
-    { name: 'Magento', desc: 'Enterprise-grade flexibility for high-volume stores.' },
-    { name: 'BigCommerce', desc: 'API-friendly platform for scalable, modern retail.' },
+    { name: 'Shopify', desc: 'Fast, secure, and perfect for growing brands.', icon: ShoppingCart },
+    { name: 'WooCommerce', desc: 'Ideal for content + commerce experiences.', icon: ShoppingCart },
+    { name: 'Magento', desc: 'Enterprise-grade flexibility for high-volume stores.', icon: ShoppingCart },
+    { name: 'BigCommerce', desc: 'API-friendly platform for scalable, modern retail.', icon: ShoppingCart },
   ];
 
   const tools = [
-    { name: 'Figma', category: 'Design collaboration' },
-    { name: 'ClickUp / Asana', category: 'Project tracking' },
-    { name: 'GitHub / Bitbucket', category: 'Version control' },
-    { name: 'BrowserStack', category: 'Cross-browser QA' },
-    { name: 'Slack / Zoom', category: 'Real-time communication' },
+    { name: 'Figma', category: 'Design collaboration', icon: Palette },
+    { name: 'ClickUp / Asana', category: 'Project tracking', icon: Calendar },
+    { name: 'GitHub / Bitbucket', category: 'Version control', icon: GitCommit },
+    { name: 'BrowserStack', category: 'Cross-browser QA', icon: Monitor },
+    { name: 'Slack / Zoom', category: 'Real-time communication', icon: MessageSquare },
   ];
 
   return (
@@ -60,13 +61,37 @@ export default function TechTools() {
             <p className="text-neutral-400 text-center mb-8 max-w-2xl mx-auto">
               Built for flexibility, content control, and seamless publishing experiences.
             </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              {cms.map((item) => (
-                <div key={item.name} className="glass-panel p-6">
-                  <h4 className="text-lg font-medium mb-2 text-vivid-orange">{item.name}</h4>
-                  <p className="text-neutral-400 text-sm">{item.desc}</p>
-                </div>
-              ))}
+            <div className="grid md:grid-cols-2 gap-8">
+              {cms.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.name} className="group relative">
+                    <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                      {/* Background Gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      
+                      {/* Icon Container */}
+                      <div className="relative z-10 mb-6">
+                        <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                          <Icon className="w-8 h-8 text-vivid-orange" />
+                        </div>
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="relative z-10">
+                        <h4 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">{item.name}</h4>
+                        <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">{item.desc}</p>
+                      </div>
+                      
+                      {/* Hover Effect Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      
+                      {/* Bottom Accent Line */}
+                      <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -75,13 +100,37 @@ export default function TechTools() {
             <p className="text-neutral-400 text-center mb-8 max-w-2xl mx-auto">
               When your idea deserves its own framework, we craft it from the ground up.
             </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {customDev.map((item) => (
-                <div key={item.name} className="glass-panel p-6">
-                  <h4 className="text-lg font-medium mb-2 text-vivid-orange">{item.name}</h4>
-                  <p className="text-neutral-400 text-sm">{item.desc}</p>
-                </div>
-              ))}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {customDev.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.name} className="group relative">
+                    <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                      {/* Background Gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      
+                      {/* Icon Container */}
+                      <div className="relative z-10 mb-6">
+                        <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                          <Icon className="w-8 h-8 text-vivid-orange" />
+                        </div>
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="relative z-10">
+                        <h4 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">{item.name}</h4>
+                        <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">{item.desc}</p>
+                      </div>
+                      
+                      {/* Hover Effect Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      
+                      {/* Bottom Accent Line */}
+                      <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -90,13 +139,37 @@ export default function TechTools() {
             <p className="text-neutral-400 text-center mb-8 max-w-2xl mx-auto">
               Where design meets conversion. We build stores that perform beautifully and scale smoothly.
             </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              {ecommerce.map((item) => (
-                <div key={item.name} className="glass-panel p-6">
-                  <h4 className="text-lg font-medium mb-2 text-vivid-orange">{item.name}</h4>
-                  <p className="text-neutral-400 text-sm">{item.desc}</p>
-                </div>
-              ))}
+            <div className="grid md:grid-cols-2 gap-8">
+              {ecommerce.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.name} className="group relative">
+                    <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                      {/* Background Gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      
+                      {/* Icon Container */}
+                      <div className="relative z-10 mb-6">
+                        <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                          <Icon className="w-8 h-8 text-vivid-orange" />
+                        </div>
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="relative z-10">
+                        <h4 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">{item.name}</h4>
+                        <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">{item.desc}</p>
+                      </div>
+                      
+                      {/* Hover Effect Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      
+                      {/* Bottom Accent Line */}
+                      <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -106,13 +179,37 @@ export default function TechTools() {
         <p className="text-neutral-300 max-w-3xl mx-auto mb-12">
           We work in systems that make collaboration easy — for both internal teams and external partners.
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {tools.map((tool) => (
-            <div key={tool.name} className="glass-panel p-6">
-              <h4 className="text-lg font-medium mb-1">{tool.name}</h4>
-              <p className="text-neutral-400 text-sm">{tool.category}</p>
-            </div>
-          ))}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {tools.map((tool, index) => {
+            const Icon = tool.icon;
+            return (
+              <div key={tool.name} className="group relative">
+                <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                  {/* Background Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Icon Container */}
+                  <div className="relative z-10 mb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                      <Icon className="w-8 h-8 text-vivid-orange" />
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h4 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">{tool.name}</h4>
+                    <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">{tool.category}</p>
+                  </div>
+                  
+                  {/* Hover Effect Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Bottom Accent Line */}
+                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
+                </div>
+              </div>
+            );
+          })}
         </div>
         <p className="text-neutral-500 text-sm mt-12 max-w-3xl mx-auto">
           Every build stays organized, traceable, and transparent — no surprises, just structure.

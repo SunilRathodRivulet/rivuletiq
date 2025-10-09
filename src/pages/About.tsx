@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import PageHero from '../components/shared/PageHero';
 import Section from '../components/shared/Section';
 import CTASection from '../components/shared/CTASection';
-import { Heart, Eye, MessageCircle, Shield, Award, Lightbulb } from 'lucide-react';
+import { Heart, Eye, MessageCircle, Shield, Award, Lightbulb, BookOpen, Users, Calendar, TrendingUp } from 'lucide-react';
 
 export default function About() {
   const values = [
@@ -74,22 +74,95 @@ export default function About() {
         centered
         className="bg-white/5"
       >
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16 max-w-6xl mx-auto">
           {[
-            'Dedicated time for learning',
-            'AI and design workshops',
-            'Festivals and celebrations',
-            'Mentorship and growth',
-          ].map((item) => (
-            <div key={item} className="glass-panel p-6">
-              <svg className="w-6 h-6 text-vivid-orange mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              <p className="text-neutral-300 text-sm">{item}</p>
-            </div>
-          ))}
+            {
+              icon: BookOpen,
+              title: 'Dedicated Learning Time',
+              description: 'Weekly learning sessions and skill development programs',
+              category: 'Growth'
+            },
+            {
+              icon: TrendingUp,
+              title: 'AI & Design Workshops',
+              description: 'Hands-on workshops on latest tools and techniques',
+              category: 'Innovation'
+            },
+            {
+              icon: Calendar,
+              title: 'Festivals & Celebrations',
+              description: 'Regular team events and cultural celebrations',
+              category: 'Community'
+            },
+            {
+              icon: Users,
+              title: 'Mentorship & Growth',
+              description: 'One-on-one mentorship and career development',
+              category: 'Support'
+            }
+          ].map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <div key={index} className="group relative">
+                <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                  {/* Background Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Category Badge */}
+                  <div className="absolute top-4 right-4">
+                    <span className="text-xs px-3 py-1 rounded-full bg-vivid-orange/10 text-vivid-orange border border-vivid-orange/20 font-medium">
+                      {item.category}
+                    </span>
+                  </div>
+                  
+                  {/* Icon Container */}
+                  <div className="relative z-10 mb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                      <Icon className="w-8 h-8 text-vivid-orange" />
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h4 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">
+                      {item.title}
+                    </h4>
+                    <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">
+                      {item.description}
+                    </p>
+                  </div>
+                  
+                  {/* Hover Effect Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Bottom Accent Line */}
+                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
+                </div>
+              </div>
+            );
+          })}
         </div>
-        <p className="text-neutral-500 mt-12 max-w-2xl mx-auto">
+        
+        {/* Additional Culture Benefits */}
+        <div className="mt-20">
+          <h3 className="text-2xl font-bold text-center mb-12 text-white">
+            Plus these everyday benefits
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-5xl mx-auto">
+            {[
+              'Flexible Hours', 'Remote Work', 'Health Insurance', 'Learning Budget', 'Team Retreats', 'Tech Allowance'
+            ].map((benefit, index) => (
+              <div key={index} className="glass-panel p-4 text-center group hover:scale-105 transition-all duration-300">
+                <div className="w-12 h-12 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center mx-auto mb-3 group-hover:bg-vivid-orange/20 transition-colors">
+                  <span className="text-vivid-orange font-bold text-sm">{benefit.charAt(0)}</span>
+                </div>
+                <span className="text-neutral-300 text-sm font-medium">{benefit}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <p className="text-neutral-500 mt-16 max-w-2xl mx-auto text-center">
           We're not chasing trends — we're building people who define them.
         </p>
       </Section>

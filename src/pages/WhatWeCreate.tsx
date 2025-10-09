@@ -59,32 +59,48 @@ export default function WhatWeCreatePage() {
         centered
       />
 
-      <Section headline="Our canvas spans across disciplines." subheadline="The Six Ways We Create" centered>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          {services.map((service) => {
+      <Section headline="Our canvas spans across disciplines." subheadline="The Six Ways We Create" centered className="bg-white/5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+          {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <Tilt3D key={service.title}>
-                <Link
-                  to={service.href}
-                  className="glass-panel glass-panel-hover p-8 group block h-full"
-                >
-                <div className="mb-6">
-                  <div className="w-14 h-14 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center group-hover:bg-vivid-orange/20 transition-colors">
-                    <Icon className="w-7 h-7 text-vivid-orange" />
-                  </div>
+                <div className="group relative">
+                  <Link
+                    to={service.href}
+                    className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300 block"
+                  >
+                    {/* Background Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    {/* Icon Container */}
+                    <div className="relative z-10 mb-6">
+                      <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                        <Icon className="w-8 h-8 text-vivid-orange" />
+                      </div>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-vivid-orange transition-colors">{service.title}</h3>
+                      <p className="text-neutral-300 leading-relaxed mb-6 group-hover:text-neutral-200 transition-colors">
+                        {service.description}
+                      </p>
+                      <span className="text-vivid-orange text-sm font-medium group-hover:gap-2 flex items-center gap-1 transition-all">
+                        Learn More
+                        <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                    </div>
+                    
+                    {/* Hover Effect Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    {/* Bottom Accent Line */}
+                    <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
+                  </Link>
                 </div>
-                <h3 className="text-2xl font-medium mb-4">{service.title}</h3>
-                <p className="text-neutral-400 font-light leading-relaxed mb-6">
-                  {service.description}
-                </p>
-                <span className="text-vivid-orange text-sm font-medium group-hover:gap-2 flex items-center gap-1 transition-all">
-                  Learn More
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </Link>
               </Tilt3D>
             );
           })}

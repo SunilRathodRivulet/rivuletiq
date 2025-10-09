@@ -1,7 +1,7 @@
 import PageHero from '../../components/shared/PageHero';
 import Section from '../../components/shared/Section';
 import CTASection from '../../components/shared/CTASection';
-import { Layers, Palette, Sparkles } from 'lucide-react';
+import { Layers, Palette, Sparkles, Search, Target, Code, CheckCircle } from 'lucide-react';
 
 export default function DesignCreative() {
   const designServices = [
@@ -27,21 +27,25 @@ export default function DesignCreative() {
       number: '01',
       title: 'Discover',
       description: 'Understanding users, goals, and brand story.',
+      icon: Search
     },
     {
       number: '02',
       title: 'Define',
       description: 'Setting visual tone, flow, and core design direction.',
+      icon: Target
     },
     {
       number: '03',
       title: 'Design',
       description: 'Crafting layouts, prototypes, and responsive experiences in Figma.',
+      icon: Palette
     },
     {
       number: '04',
       title: 'Deliver',
       description: 'Handing off production-ready assets to developers — pixel-perfect, tested, and scalable.',
+      icon: CheckCircle
     },
   ];
 
@@ -68,19 +72,37 @@ export default function DesignCreative() {
         centered
       />
 
-      <Section headline="A visual language for every need." subheadline="What We Design" centered>
-        <div className="grid md:grid-cols-3 gap-8 mt-12">
-          {designServices.map((service) => {
+      <Section headline="A visual language for every need." subheadline="What We Design" centered className="bg-white/5">
+        <div className="grid md:grid-cols-3 gap-8 mt-16">
+          {designServices.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div key={service.title} className="glass-panel p-8">
-                <div className="w-14 h-14 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center mb-6">
-                  <Icon className="w-7 h-7 text-vivid-orange" />
+              <div key={service.title} className="group relative">
+                <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                  {/* Background Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Icon Container */}
+                  <div className="relative z-10 mb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                      <Icon className="w-8 h-8 text-vivid-orange" />
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h3 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">{service.title}</h3>
+                    <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">
+                      {service.description}
+                    </p>
+                  </div>
+                  
+                  {/* Hover Effect Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Bottom Accent Line */}
+                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
                 </div>
-                <h3 className="text-xl font-medium mb-3">{service.title}</h3>
-                <p className="text-neutral-400 font-light leading-relaxed">
-                  {service.description}
-                </p>
               </div>
             );
           })}
@@ -93,20 +115,61 @@ export default function DesignCreative() {
         copy="Creativity thrives with clarity. Our design process moves through rhythm — discover, define, design, and deliver — each phase ensuring alignment and purpose."
         className="bg-white/5"
       >
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-          {process.map((step) => (
-            <div key={step.number} className="relative">
-              <div className="text-vivid-orange/20 text-6xl font-black mb-4">
-                {step.number}
-              </div>
-              <h4 className="text-xl font-medium mb-3">{step.title}</h4>
-              <p className="text-neutral-400 font-light leading-relaxed">
-                {step.description}
-              </p>
+        <div className="relative mt-16">
+          {/* Timeline Container */}
+          <div className="relative max-w-6xl mx-auto">
+            {/* Main Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-vivid-orange via-vivid-orange/60 to-vivid-orange/30 rounded-full timeline-line"></div>
+            
+            {/* Timeline Nodes */}
+            <div className="space-y-24">
+              {process.map((step, index) => {
+                const Icon = step.icon;
+                const isEven = index % 2 === 0;
+                
+                return (
+                  <div key={step.number} className="relative" style={{ animationDelay: `${index * 0.2}s` }}>
+                    {/* Timeline Node */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2 z-10">
+                      <div className="w-16 h-16 rounded-full bg-vivid-orange/20 border-4 border-vivid-orange/40 flex items-center justify-center backdrop-blur-sm timeline-node">
+                        <Icon className="w-8 h-8 text-vivid-orange" />
+                      </div>
+                      {/* Node Glow Effect */}
+                      <div className="absolute inset-0 w-16 h-16 rounded-full bg-vivid-orange/10 animate-pulse"></div>
+                    </div>
+                    
+                    {/* Content Card */}
+                    <div className={`flex items-center ${isEven ? 'justify-start' : 'justify-end'}`}>
+                      <div className={`w-5/12 ${isEven ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
+                        <div className={`glass-panel p-8 relative group hover:scale-105 transition-all duration-300 ${isEven ? 'timeline-card-left' : 'timeline-card-right'}`} style={{ animationDelay: `${index * 0.3}s` }}>
+                          {/* Step Number Badge */}
+                          <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-vivid-orange flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                            {step.number}
+                          </div>
+                          
+                          {/* Connection Line to Node */}
+                          <div className={`absolute top-1/2 -translate-y-1/2 w-8 h-0.5 bg-vivid-orange/30 ${isEven ? '-right-8' : '-left-8'}`}></div>
+                          
+                          <h4 className="text-2xl font-bold mb-4 text-vivid-orange group-hover:text-vivid-orange/80 transition-colors">
+                            {step.title}
+                          </h4>
+                          <p className="text-neutral-300 leading-relaxed text-lg">
+                            {step.description}
+                          </p>
+                          
+                          {/* Hover Effect */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          ))}
+          </div>
         </div>
-        <p className="text-neutral-500 text-sm mt-12 max-w-2xl mx-auto text-center">
+        
+        <p className="text-neutral-500 text-sm mt-16 max-w-2xl mx-auto text-center">
           AI assists us in research and iteration — but the vision always remains human.
         </p>
       </Section>

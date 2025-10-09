@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import ScrollbarEnhancer from './components/ScrollbarEnhancer';
+import PageLoadAnimation from './components/PageLoadAnimation';
 import Home from './pages/Home';
 import WhatWeCreatePage from './pages/WhatWeCreate';
 import DesignCreative from './pages/create/DesignCreative';
@@ -36,6 +37,7 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <PageLoadAnimation />
       <CustomCursor />
       <ScrollbarEnhancer />
       <div className="min-h-screen">

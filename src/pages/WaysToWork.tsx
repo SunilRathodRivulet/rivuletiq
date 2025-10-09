@@ -1,7 +1,7 @@
 import PageHero from '../components/shared/PageHero';
 import Section from '../components/shared/Section';
 import CTASection from '../components/shared/CTASection';
-import { Handshake, FolderKanban, Users, Wrench, AlertCircle } from 'lucide-react';
+import { Handshake, FolderKanban, Users, Wrench, AlertCircle, UserCheck, Globe, FileText, Palette } from 'lucide-react';
 
 export default function WaysToWork() {
   const engagementModels = [
@@ -98,20 +98,58 @@ export default function WaysToWork() {
         centered
         className="bg-white/5"
       >
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16 max-w-6xl mx-auto">
           {[
-            'Dedicated point of contact',
-            'US + India blended team structure',
-            'Clear documentation & deliverables',
-            'Design-first approach always',
-          ].map((item) => (
-            <div key={item} className="glass-panel p-6">
-              <svg className="w-6 h-6 text-vivid-orange mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              <p className="text-neutral-300 text-sm">{item}</p>
+            {
+              title: 'Dedicated Point of Contact',
+              description: 'Single point of contact for seamless communication',
+              icon: UserCheck
+            },
+            {
+              title: 'US + India Team Structure',
+              description: 'Blended team structure for global coverage',
+              icon: Globe
+            },
+            {
+              title: 'Clear Documentation',
+              description: 'Comprehensive documentation & deliverables',
+              icon: FileText
+            },
+            {
+              title: 'Design-First Approach',
+              description: 'Design-first methodology in every project',
+              icon: Palette
+            }
+          ].map((item, index) => {
+            const Icon = item.icon;
+            return (
+            <div key={index} className="group relative">
+              <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                {/* Background Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                {/* Icon Container */}
+                <div className="relative z-10 mb-6">
+                  <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                    <Icon className="w-8 h-8 text-vivid-orange" />
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <h4 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">{item.title}</h4>
+                  <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">{item.description}</p>
+                </div>
+                
+                {/* Hover Effect Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-vivid-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                {/* Bottom Accent Line */}
+                <div className="absolute bottom-0 left-0 w-0 h-1 bg-vivid-orange group-hover:w-full transition-all duration-500"></div>
+              </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </Section>
 
