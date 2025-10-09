@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom';
 import PageHero from '../components/shared/PageHero';
 import Section from '../components/shared/Section';
 import CTASection from '../components/shared/CTASection';
-import { Heart, Eye, MessageCircle, Shield, Award, Lightbulb, BookOpen, Users, Calendar, TrendingUp } from 'lucide-react';
+import { Heart, Eye, MessageCircle, Shield, Award, Lightbulb, BookOpen, Users, Calendar, TrendingUp, Clock, Home, DollarSign, Plane, Laptop } from 'lucide-react';
 
 export default function About() {
   const values = [
@@ -150,15 +149,26 @@ export default function About() {
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-5xl mx-auto">
             {[
-              'Flexible Hours', 'Remote Work', 'Health Insurance', 'Learning Budget', 'Team Retreats', 'Tech Allowance'
-            ].map((benefit, index) => (
-              <div key={index} className="glass-panel p-4 text-center group hover:scale-105 transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center mx-auto mb-3 group-hover:bg-vivid-orange/20 transition-colors">
-                  <span className="text-vivid-orange font-bold text-sm">{benefit.charAt(0)}</span>
+              { name: 'Flexible Hours', icon: Clock, category: 'Work-Life' },
+              { name: 'Remote Work', icon: Home, category: 'Flexibility' },
+              { name: 'Health Insurance', icon: Heart, category: 'Wellness' },
+              { name: 'Learning Budget', icon: DollarSign, category: 'Growth' },
+              { name: 'Team Retreats', icon: Plane, category: 'Team Building' },
+              { name: 'Tech Allowance', icon: Laptop, category: 'Equipment' }
+            ].map((benefit) => {
+              const Icon = benefit.icon;
+              return (
+                <div key={benefit.name} className="glass-panel p-4 text-center group hover:scale-105 transition-all duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center mx-auto mb-3 group-hover:bg-vivid-orange/20 transition-colors">
+                    <Icon className="w-6 h-6 text-vivid-orange" />
+                  </div>
+                  <span className="text-neutral-300 text-sm font-medium">{benefit.name}</span>
+                  <div className="mt-1">
+                    <span className="text-vivid-orange/60 text-xs">{benefit.category}</span>
+                  </div>
                 </div>
-                <span className="text-neutral-300 text-sm font-medium">{benefit}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
         

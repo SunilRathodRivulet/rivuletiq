@@ -26,7 +26,7 @@ export default function Footer() {
   return (
     <footer className="relative border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12 mb-8 sm:mb-12">
           <div className="lg:col-span-2">
             <div className="mb-6">
               <img
@@ -61,7 +61,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex gap-4 mt-6">
+            <div className="flex gap-3 sm:gap-4 mt-6">
               {[
                 { icon: Linkedin, href: 'https://in.linkedin.com/company/rivuletiq' },
                 { icon: Twitter, href: 'https://x.com/RivuletIQ' },
@@ -74,7 +74,8 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-vivid-orange/10 hover:border-vivid-orange/30 transition-all group"
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-vivid-orange/10 hover:border-vivid-orange/30 transition-all group touch-manipulation"
+                    style={{ minWidth: '44px', minHeight: '44px' }}
                   >
                     <Icon className="w-5 h-5 text-neutral-400 group-hover:text-vivid-orange transition-colors" />
                   </a>

@@ -1,7 +1,7 @@
 import PageHero from '../components/shared/PageHero';
 import Section from '../components/shared/Section';
 import CTASection from '../components/shared/CTASection';
-import { Search, PenTool, Code, CheckCircle, Rocket, Shield, GitBranch, Server, Database, BarChart3, Lock, Zap, Clock, ShieldCheck, Palette, Calendar, GitCommit, Monitor, MessageSquare } from 'lucide-react';
+import { Search, PenTool, Code, CheckCircle, Rocket, Shield, GitBranch, Server, Database, BarChart3, Lock, Zap, Clock, ShieldCheck, Palette, Calendar, GitCommit, Monitor, MessageSquare, Globe, Layers, Terminal, Cloud, Container, TestTube, BookOpen } from 'lucide-react';
 
 export default function HowWeDeliver() {
   const workflow = [
@@ -94,11 +94,11 @@ export default function HowWeDeliver() {
         <div className="relative mt-16">
           {/* Timeline Container */}
           <div className="relative max-w-6xl mx-auto">
-            {/* Main Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-vivid-orange via-vivid-orange/60 to-vivid-orange/30 rounded-full timeline-line"></div>
+            {/* Main Timeline Line - Hidden on mobile */}
+            <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-vivid-orange via-vivid-orange/60 to-vivid-orange/30 rounded-full timeline-line"></div>
             
             {/* Timeline Nodes */}
-            <div className="space-y-24">
+            <div className="space-y-12 lg:space-y-24">
               {workflow.map((step, index) => {
                 const Icon = step.icon;
                 const isEven = index % 2 === 0;
@@ -106,7 +106,7 @@ export default function HowWeDeliver() {
                 return (
                   <div key={step.number} className="relative" style={{ animationDelay: `${index * 0.2}s` }}>
                     {/* Timeline Node */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2 z-10">
+                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2 z-10 hidden lg:block">
                       <div className="w-16 h-16 rounded-full bg-vivid-orange/20 border-4 border-vivid-orange/40 flex items-center justify-center backdrop-blur-sm timeline-node">
                         <Icon className="w-8 h-8 text-vivid-orange" />
                       </div>
@@ -114,22 +114,29 @@ export default function HowWeDeliver() {
                       <div className="absolute inset-0 w-16 h-16 rounded-full bg-vivid-orange/10 animate-pulse"></div>
                     </div>
                     
+                    {/* Mobile Timeline Node */}
+                    <div className="lg:hidden flex items-center justify-center mb-6">
+                      <div className="w-12 h-12 rounded-full bg-vivid-orange/20 border-4 border-vivid-orange/40 flex items-center justify-center backdrop-blur-sm">
+                        <Icon className="w-6 h-6 text-vivid-orange" />
+                      </div>
+                    </div>
+                    
                     {/* Content Card */}
                     <div className={`flex items-center ${isEven ? 'justify-start' : 'justify-end'}`}>
-                      <div className={`w-5/12 ${isEven ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                        <div className={`glass-panel p-8 relative group hover:scale-105 transition-all duration-300 ${isEven ? 'timeline-card-left' : 'timeline-card-right'}`} style={{ animationDelay: `${index * 0.3}s` }}>
+                      <div className={`w-full lg:w-5/12 ${isEven ? 'lg:pr-8 lg:text-right' : 'lg:pl-8 lg:text-left'}`}>
+                        <div className={`glass-panel p-6 lg:p-8 relative group hover:scale-105 transition-all duration-300 ${isEven ? 'timeline-card-left' : 'timeline-card-right'}`} style={{ animationDelay: `${index * 0.3}s` }}>
                           {/* Step Number Badge */}
-                          <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-vivid-orange flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                          <div className="absolute -top-3 -right-3 lg:-top-4 lg:-right-4 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-vivid-orange flex items-center justify-center text-white font-bold text-sm lg:text-lg shadow-lg">
                             {step.number}
                           </div>
                           
-                          {/* Connection Line to Node */}
-                          <div className={`absolute top-1/2 -translate-y-1/2 w-8 h-0.5 bg-vivid-orange/30 ${isEven ? '-right-8' : '-left-8'}`}></div>
+                          {/* Connection Line to Node - Hidden on mobile */}
+                          <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 w-8 h-0.5 bg-vivid-orange/30 ${isEven ? '-right-8' : '-left-8'}`}></div>
                           
-                          <h4 className="text-2xl font-bold mb-4 text-vivid-orange group-hover:text-vivid-orange/80 transition-colors">
+                          <h4 className="text-xl lg:text-2xl font-bold mb-3 lg:mb-4 text-vivid-orange group-hover:text-vivid-orange/80 transition-colors">
                             {step.title}
                           </h4>
-                          <p className="text-neutral-300 leading-relaxed text-lg">
+                          <p className="text-neutral-300 leading-relaxed text-base lg:text-lg">
                             {step.description}
                           </p>
                           
@@ -175,35 +182,35 @@ export default function HowWeDeliver() {
         <p className="text-neutral-300 max-w-3xl mx-auto mb-16">
           We work within modern systems that make collaboration clear, traceable, and efficient — whether we're working with your internal team or as your external partner.
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {tools.map((tool, index) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+          {tools.map((tool) => {
             const Icon = tool.icon;
             return (
               <div key={tool.name} className="group relative">
-                <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+                <div className="glass-panel p-6 lg:p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
                   {/* Background Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   {/* Category Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="text-xs px-3 py-1 rounded-full bg-vivid-orange/10 text-vivid-orange border border-vivid-orange/20 font-medium">
+                  <div className="absolute top-3 right-3 lg:top-4 lg:right-4">
+                    <span className="text-xs px-2 lg:px-3 py-1 rounded-full bg-vivid-orange/10 text-vivid-orange border border-vivid-orange/20 font-medium">
                       {tool.category}
                     </span>
                   </div>
                   
                   {/* Icon Container */}
-                  <div className="relative z-10 mb-6">
-                    <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
-                      <Icon className="w-8 h-8 text-vivid-orange" />
+                  <div className="relative z-10 mb-4 lg:mb-6">
+                    <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                      <Icon className="w-6 h-6 lg:w-8 lg:h-8 text-vivid-orange" />
                     </div>
                   </div>
                   
                   {/* Content */}
                   <div className="relative z-10">
-                    <h4 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">
+                    <h4 className="text-lg lg:text-xl font-bold mb-2 lg:mb-3 text-white group-hover:text-vivid-orange transition-colors">
                       {tool.name}
                     </h4>
-                    <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">
+                    <p className="text-neutral-300 leading-relaxed text-sm lg:text-base group-hover:text-neutral-200 transition-colors">
                       {tool.description}
                     </p>
                   </div>
@@ -220,22 +227,38 @@ export default function HowWeDeliver() {
         </div>
         
         {/* Additional Tools Section */}
-        <div className="mt-20">
-          <h3 className="text-2xl font-bold text-center mb-12 text-white">
+        <div className="mt-16 lg:mt-20">
+          <h3 className="text-xl lg:text-2xl font-bold text-center mb-8 lg:mb-12 text-white">
             Plus a comprehensive toolkit
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-6 max-w-5xl mx-auto">
             {[
-              'React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js', 'PostgreSQL',
-              'AWS', 'Vercel', 'Docker', 'Jest', 'Cypress', 'Storybook'
-            ].map((tech, index) => (
-              <div key={index} className="glass-panel p-4 text-center group hover:scale-105 transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center mx-auto mb-3 group-hover:bg-vivid-orange/20 transition-colors">
-                  <span className="text-vivid-orange font-bold text-sm">{tech.charAt(0)}</span>
+              { name: 'React', icon: Globe, category: 'Frontend' },
+              { name: 'Next.js', icon: Layers, category: 'Framework' },
+              { name: 'TypeScript', icon: Terminal, category: 'Language' },
+              { name: 'Tailwind CSS', icon: Palette, category: 'Styling' },
+              { name: 'Node.js', icon: Server, category: 'Backend' },
+              { name: 'PostgreSQL', icon: Database, category: 'Database' },
+              { name: 'AWS', icon: Cloud, category: 'Cloud' },
+              { name: 'Vercel', icon: Rocket, category: 'Deployment' },
+              { name: 'Docker', icon: Container, category: 'DevOps' },
+              { name: 'Jest', icon: TestTube, category: 'Testing' },
+              { name: 'Cypress', icon: Monitor, category: 'Testing' },
+              { name: 'Storybook', icon: BookOpen, category: 'Documentation' }
+            ].map((tech) => {
+              const Icon = tech.icon;
+              return (
+                <div key={tech.name} className="glass-panel p-3 lg:p-4 text-center group hover:scale-105 transition-all duration-300">
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-vivid-orange/10 border border-vivid-orange/20 flex items-center justify-center mx-auto mb-2 lg:mb-3 group-hover:bg-vivid-orange/20 transition-colors">
+                    <Icon className="w-5 h-5 lg:w-6 lg:h-6 text-vivid-orange" />
+                  </div>
+                  <span className="text-neutral-300 text-xs lg:text-sm font-medium">{tech.name}</span>
+                  <div className="mt-1">
+                    <span className="text-vivid-orange/60 text-xs">{tech.category}</span>
+                  </div>
                 </div>
-                <span className="text-neutral-300 text-sm font-medium">{tech}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
         
@@ -251,7 +274,7 @@ export default function HowWeDeliver() {
         centered
         className="bg-white/5"
       >
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mt-12 lg:mt-16 max-w-6xl mx-auto">
           {[
             {
               icon: GitBranch,
@@ -273,27 +296,27 @@ export default function HowWeDeliver() {
               title: 'Performance Monitoring',
               description: 'Real-time analytics and uptime reporting'
             }
-          ].map((item, index) => {
+          ].map((item) => {
             const Icon = item.icon;
             return (
-              <div key={index} className="group relative">
-                <div className="glass-panel p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
+              <div key={item.title} className="group relative">
+                <div className="glass-panel p-6 lg:p-8 h-full relative overflow-hidden hover:scale-105 transition-all duration-300">
                   {/* Background Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/5 to-vivid-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   {/* Icon Container */}
-                  <div className="relative z-10 mb-6">
-                    <div className="w-16 h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center mb-4 group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
-                      <Icon className="w-8 h-8 text-vivid-orange" />
+                  <div className="relative z-10 mb-4 lg:mb-6">
+                    <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-vivid-orange/20 border border-vivid-orange/30 flex items-center justify-center group-hover:bg-vivid-orange/30 group-hover:border-vivid-orange/50 group-hover:scale-110 transition-all duration-300">
+                      <Icon className="w-6 h-6 lg:w-8 lg:h-8 text-vivid-orange" />
                     </div>
                   </div>
                   
                   {/* Content */}
                   <div className="relative z-10">
-                    <h4 className="text-xl font-bold mb-3 text-white group-hover:text-vivid-orange transition-colors">
+                    <h4 className="text-lg lg:text-xl font-bold mb-2 lg:mb-3 text-white group-hover:text-vivid-orange transition-colors">
                       {item.title}
                     </h4>
-                    <p className="text-neutral-300 leading-relaxed group-hover:text-neutral-200 transition-colors">
+                    <p className="text-neutral-300 leading-relaxed text-sm lg:text-base group-hover:text-neutral-200 transition-colors">
                       {item.description}
                     </p>
                   </div>
@@ -307,7 +330,7 @@ export default function HowWeDeliver() {
         </div>
         
         {/* Additional Features Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 lg:mt-16 max-w-4xl mx-auto">
           {[
             {
               icon: Lock,
@@ -324,15 +347,15 @@ export default function HowWeDeliver() {
               title: '24/7 Monitoring',
               description: 'Proactive monitoring and alert systems'
             }
-          ].map((feature, index) => {
+          ].map((feature) => {
             const Icon = feature.icon;
             return (
-              <div key={index} className="glass-panel p-6 text-center group hover:scale-105 transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-vivid-orange/10 border border-vivid-orange/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-vivid-orange/20 transition-colors">
-                  <Icon className="w-6 h-6 text-vivid-orange" />
+              <div key={feature.title} className="glass-panel p-4 lg:p-6 text-center group hover:scale-105 transition-all duration-300">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-vivid-orange/10 border border-vivid-orange/30 flex items-center justify-center mx-auto mb-3 lg:mb-4 group-hover:bg-vivid-orange/20 transition-colors">
+                  <Icon className="w-5 h-5 lg:w-6 lg:h-6 text-vivid-orange" />
                 </div>
-                <h5 className="text-lg font-semibold mb-2 text-white">{feature.title}</h5>
-                <p className="text-neutral-400 text-sm">{feature.description}</p>
+                <h5 className="text-base lg:text-lg font-semibold mb-2 text-white">{feature.title}</h5>
+                <p className="text-neutral-400 text-xs lg:text-sm">{feature.description}</p>
               </div>
             );
           })}

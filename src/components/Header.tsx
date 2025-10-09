@@ -37,9 +37,9 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-brand-black/80 border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           <Link to="/" className="flex items-center">
-            <img src="/Logo.svg" alt="Rivulet IQ" className="h-8" />
+            <img src="/Logo.svg" alt="Rivulet IQ" className="h-6 sm:h-8" />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
@@ -79,9 +79,10 @@ export default function Header() {
           </div>
 
           <button
-            className="lg:hidden p-2 text-neutral-300 hover:text-vivid-orange transition-colors"
+            className="lg:hidden p-3 text-neutral-300 hover:text-vivid-orange transition-colors touch-manipulation"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
+            style={{ minWidth: '44px', minHeight: '44px' }}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
