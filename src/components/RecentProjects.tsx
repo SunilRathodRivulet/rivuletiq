@@ -1,5 +1,7 @@
-import { ArrowRight, ExternalLink } from 'lucide-react';
+          import { ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Tilt3D from './Tilt3D';
+import AnimatedBackground from './AnimatedBackground';
 
 interface Project {
   category: string;
@@ -9,7 +11,6 @@ interface Project {
   features: string[];
   tech: string[];
   image?: string;
-  caseStudyUrl?: string;
   liveUrl?: string;
 }
 
@@ -33,6 +34,7 @@ export default function RecentProjects() {
       ],
       tech: ['React', 'Node.js', 'PostgreSQL', 'OpenAI', 'AWS'],
       image: 'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      liveUrl: 'https://example.com',
     },
     {
       category: 'E-Commerce',
@@ -52,6 +54,7 @@ export default function RecentProjects() {
       ],
       tech: ['Next.js', 'Shopify', 'Stripe', 'TailwindCSS', 'Vercel'],
       image: 'https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      liveUrl: 'https://example.com',
     },
     {
       category: 'Healthcare Tech',
@@ -71,24 +74,29 @@ export default function RecentProjects() {
       ],
       tech: ['Vue.js', 'Laravel', 'WebRTC', 'MySQL', 'Digital Ocean'],
       image: 'https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      liveUrl: 'https://example.com',
     },
   ];
 
   return (
     <section className="relative py-32 px-6 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-vivid-orange/10 via-transparent to-transparent" />
+      <AnimatedBackground particleCount={35} opacity={0.3} />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <span className="text-sm font-light text-vivid-orange uppercase tracking-wider">
-            Featured Work
-          </span>
-          <h2 className="mt-4 mb-6">
-            Recent <span className="text-vivid-orange">Success Stories</span>
+          <h2 className="mb-6">
+            Design that thinks. Code that <span className="text-vivid-orange">feels</span>.
           </h2>
           <p className="text-neutral-400 max-w-2xl mx-auto">
-            Explore our latest projects where design meets innovation to deliver exceptional digital experiences.
+            We measure success not in pixels but in purpose.
+            <br /><br />
+            Each project is a reflection of the brands we help shape — intelligent, intuitive, and built to grow.
           </p>
+          <div className="mt-8">
+            <Link to="/deliver" className="btn-outline">
+              See Our Approach
+            </Link>
+          </div>
         </div>
 
         <div className="space-y-24">
@@ -151,14 +159,10 @@ export default function RecentProjects() {
                   </div>
 
                   <div className="flex flex-wrap gap-4">
-                    <button className="btn-primary group">
-                      View Case Study
-                      <ArrowRight className="inline-block ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-                    </button>
-                    <button className="btn-outline group">
+                    <a href={project.liveUrl || '#'} target="_blank" rel="noopener noreferrer" className="btn-primary group">
                       <ExternalLink className="inline-block mr-2 w-5 h-5" />
                       Visit Site
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>

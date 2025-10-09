@@ -1,6 +1,7 @@
 import { ArrowRight, Calendar, Mail, MessageSquare, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Tilt3D from './Tilt3D';
+import AnimatedBackground from './AnimatedBackground';
 
 export default function FinalCTA() {
   const benefits = [
@@ -11,11 +12,7 @@ export default function FinalCTA() {
 
   return (
     <section className="relative py-32 px-6 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-radial from-vivid-orange/10 via-transparent to-transparent" />
-
-      <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-vivid-orange/20 rounded-full blur-[120px] animate-float" />
-      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-vivid-orange/10 rounded-full blur-[120px] animate-float-delayed" />
-      <div className="absolute bottom-1/4 left-1/2 w-64 h-64 bg-vivid-orange/5 rounded-full blur-[100px]" />
+      <AnimatedBackground particleCount={45} opacity={0.35} />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
@@ -24,13 +21,10 @@ export default function FinalCTA() {
               Let's Connect
             </span>
             <h2 className="mt-4 mb-6">
-              Ready to Build Something{' '}
-              <span className="text-vivid-orange">Amazing?</span>
+              Let's build what's <span className="text-vivid-orange">next</span>.
             </h2>
             <p className="text-xl text-neutral-400 mb-8 font-light leading-relaxed">
-              Whether you're launching a new product, scaling your business, or
-              reimagining your digital presence—we're here to turn your vision
-              into reality.
+              Your next website, your next product, your next leap — starts with one conversation.
             </p>
 
             <div className="space-y-4 mb-10">

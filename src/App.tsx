@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
+import ScrollbarEnhancer from './components/ScrollbarEnhancer';
 import Home from './pages/Home';
 import WhatWeCreatePage from './pages/WhatWeCreate';
 import DesignCreative from './pages/create/DesignCreative';
@@ -36,6 +37,7 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <CustomCursor />
+      <ScrollbarEnhancer />
       <div className="min-h-screen">
         <Header />
         <main>

@@ -45,30 +45,30 @@ export default function ProofBar() {
   const stats = [
     {
       icon: TrendingUp,
-      value: 250,
+      value: 300,
       suffix: '+',
-      label: 'Projects Delivered',
+      label: 'successful website builds',
       color: 'text-vivid-orange',
     },
     {
       icon: Award,
-      value: 98,
-      suffix: '%',
-      label: 'Client Satisfaction',
+      value: 40,
+      suffix: '+',
+      label: 'design-first brands empowered',
       color: 'text-vivid-orange',
     },
     {
       icon: Users,
-      value: 50,
+      value: 85,
       suffix: '+',
-      label: 'Happy Clients',
+      label: 'creative minds across design, code, and strategy',
       color: 'text-vivid-orange',
     },
     {
       icon: Zap,
-      value: 15,
+      value: 10,
       suffix: '+',
-      label: 'Years Combined',
+      label: 'global agency partnerships',
       color: 'text-vivid-orange',
     },
   ];
@@ -76,6 +76,14 @@ export default function ProofBar() {
   return (
     <section className="relative py-20 px-6">
       <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="mb-6">
+            Numbers that <span className="text-vivid-orange">speak for us</span>.
+          </h2>
+          <p className="text-neutral-400 max-w-2xl mx-auto">
+            Behind every number, there's a story of collaboration, curiosity, and craft.
+          </p>
+        </div>
         <div className="glass-panel p-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => {

@@ -1,4 +1,5 @@
 import { Heart, Lightbulb, Target, Zap, Sparkles, Palette, Code, Users } from 'lucide-react';
+import AnimatedBackground from './AnimatedBackground';
 import Tilt3D from './Tilt3D';
 
 export default function DesignPhilosophy() {
@@ -48,20 +49,20 @@ export default function DesignPhilosophy() {
   ];
 
   return (
-    <section className="relative py-32 px-6 bg-white/[0.02]">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-vivid-orange/5 to-transparent" />
+    <section className="relative py-32 px-6 overflow-hidden">
+      <AnimatedBackground particleCount={40} opacity={0.3} />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <span className="text-sm font-light text-vivid-orange uppercase tracking-wider">
-            How We Work
-          </span>
-          <h2 className="mt-4 mb-6">
-            Our Design <span className="text-vivid-orange">Philosophy</span>
+          <h2 className="mb-6">
+            Creativity with <span className="text-vivid-orange">clarity</span>.
           </h2>
           <p className="text-xl text-neutral-400 max-w-3xl mx-auto font-light">
-            Guided by principles that put people first, embrace innovation, and
-            deliver measurable impact.
+            At Rivulet, design is not decoration — it's direction.
+            <br /><br />
+            Every interface we craft and every line of code we write follows a single flow: form guided by function, powered by curiosity.
+            <br /><br />
+            AI helps us move faster, but our heart still beats for the craft.
           </p>
         </div>
 

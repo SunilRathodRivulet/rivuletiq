@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import AnimatedBackground from '../AnimatedBackground';
 
 interface CTASectionProps {
   headline: string;
@@ -9,8 +10,9 @@ interface CTASectionProps {
 
 export default function CTASection({ headline, subhead, ctaPrimary, ctaSecondary }: CTASectionProps) {
   return (
-    <section className="py-24 px-6">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="py-24 px-6 relative overflow-hidden">
+      <AnimatedBackground particleCount={25} opacity={0.25} />
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
         <h2 className="mb-6">{headline}</h2>
         {subhead && (
           <p className="text-xl text-neutral-300 font-light mb-10">

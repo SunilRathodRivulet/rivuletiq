@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import AnimatedBackground from '../AnimatedBackground';
 
 interface PageHeroProps {
   headline: string;
@@ -9,8 +10,9 @@ interface PageHeroProps {
 
 export default function PageHero({ headline, subhead, ctaPrimary, ctaSecondary }: PageHeroProps) {
   return (
-    <section className="relative pt-32 pb-20 px-6">
-      <div className="max-w-5xl mx-auto text-center">
+    <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+      <AnimatedBackground particleCount={30} opacity={0.3} />
+      <div className="relative z-10 max-w-5xl mx-auto text-center">
         <h1 className="mb-6 bg-gradient-to-r from-brand-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent">
           {headline}
         </h1>

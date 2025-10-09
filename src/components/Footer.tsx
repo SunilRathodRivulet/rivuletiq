@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Linkedin, Twitter, Github } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
@@ -63,15 +63,17 @@ export default function Footer() {
 
             <div className="flex gap-4 mt-6">
               {[
-                { icon: Linkedin, href: '#' },
-                { icon: Twitter, href: '#' },
-                { icon: Github, href: '#' },
+                { icon: Linkedin, href: 'https://in.linkedin.com/company/rivuletiq' },
+                { icon: Twitter, href: 'https://x.com/RivuletIQ' },
+                { icon: Instagram, href: 'https://www.instagram.com/rivuletiq/' },
               ].map((social, index) => {
                 const Icon = social.icon;
                 return (
                   <a
                     key={index}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-vivid-orange/10 hover:border-vivid-orange/30 transition-all group"
                   >
                     <Icon className="w-5 h-5 text-neutral-400 group-hover:text-vivid-orange transition-colors" />
@@ -105,26 +107,6 @@ export default function Footer() {
             © {currentYear} Rivulet IQ. All rights reserved.
           </p>
 
-          <div className="flex gap-6">
-            <a
-              href="#"
-              className="text-sm text-neutral-500 hover:text-vivid-orange transition-colors font-light"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="#"
-              className="text-sm text-neutral-500 hover:text-vivid-orange transition-colors font-light"
-            >
-              Terms of Service
-            </a>
-            <a
-              href="#"
-              className="text-sm text-neutral-500 hover:text-vivid-orange transition-colors font-light"
-            >
-              Cookie Policy
-            </a>
-          </div>
         </div>
       </div>
     </footer>
