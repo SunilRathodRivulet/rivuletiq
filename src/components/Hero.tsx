@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -96,11 +97,11 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className="btn-primary group">
+          <Link to="/contact" className="btn-primary group">
             Book a Discovery Call
             <ArrowRight className="inline-block ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </button>
-          <button className="btn-outline">Explore What We Create</button>
+          </Link>
+          <Link to="/what-we-create" className="btn-outline">Explore What We Create</Link>
         </div>
       </div>
 
