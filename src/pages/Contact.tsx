@@ -19,7 +19,7 @@ export default function Contact() {
         centered
       />
 
-      <div className="py-20 px-6">
+      <div className="pt-20 pb-12 px-6">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
           <div className="space-y-8">
             {[
