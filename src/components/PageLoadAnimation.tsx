@@ -5,7 +5,6 @@ export default function PageLoadAnimation() {
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<'loading' | 'revealing' | 'complete'>('loading');
   const [glowIntensity, setGlowIntensity] = useState(0);
-  const [showInteractionPrompt, setShowInteractionPrompt] = useState(false);
 
   // Use global launch sound function from AudioManager
   const playLaunchSound = async () => {
@@ -21,16 +20,6 @@ export default function PageLoadAnimation() {
   useEffect(() => {
     // Show loader immediately on mount
     setIsVisible(true);
-
-    // Handle user interaction to hide prompt
-    const handleUserInteraction = () => {
-      setShowInteractionPrompt(false);
-    };
-
-    // Add click listener to hide prompt
-    document.addEventListener('click', handleUserInteraction, { once: true });
-    document.addEventListener('keydown', handleUserInteraction, { once: true });
-    document.addEventListener('touchstart', handleUserInteraction, { once: true });
 
     // Simulate loading progress with realistic curve
     const progressInterval = setInterval(() => {
@@ -59,11 +48,6 @@ export default function PageLoadAnimation() {
       setPhase('complete');
     }, 2800);
 
-    // Show interaction prompt after 2 seconds if no user interaction
-    const promptTimer = setTimeout(() => {
-      setShowInteractionPrompt(true);
-    }, 2000);
-
     // Hide animation after 3.5 seconds
     const hideTimer = setTimeout(async () => {
       await playLaunchSound();
@@ -71,14 +55,10 @@ export default function PageLoadAnimation() {
     }, 3500);
 
     return () => {
-      document.removeEventListener('click', handleUserInteraction);
-      document.removeEventListener('keydown', handleUserInteraction);
-      document.removeEventListener('touchstart', handleUserInteraction);
       clearInterval(progressInterval);
       clearInterval(glowInterval);
       clearTimeout(phaseTimer1);
       clearTimeout(phaseTimer2);
-      clearTimeout(promptTimer);
       clearTimeout(hideTimer);
     };
   }, []);
@@ -112,65 +92,35 @@ export default function PageLoadAnimation() {
 
       {/* Main content with enhanced effects */}
       <div className="loader-content">
-        {/* Enhanced logo with multiple layers */}
-        <div className="loader-logo">
-          <div className="logo-outer-ring" />
-          <div className="logo-square">
-            <div className="logo-inner-square">
-              <span className="logo-letter">R</span>
-            </div>
-            <div className="logo-glow" style={{ 
-              boxShadow: `0 0 ${20 + Math.sin(glowIntensity) * 10}px rgba(255, 97, 0, ${0.3 + Math.sin(glowIntensity) * 0.2})` 
-            }} />
-          </div>
-        </div>
 
-        {/* Enhanced typography with animations */}
-        <div className="loader-text">
-          <h1 className="brand-name">
-            <span className="letter" style={{ animationDelay: '0s' }}>R</span>
-            <span className="letter" style={{ animationDelay: '0.1s' }}>i</span>
-            <span className="letter" style={{ animationDelay: '0.2s' }}>v</span>
-            <span className="letter" style={{ animationDelay: '0.3s' }}>u</span>
-            <span className="letter" style={{ animationDelay: '0.4s' }}>l</span>
-            <span className="letter" style={{ animationDelay: '0.5s' }}>e</span>
-            <span className="letter" style={{ animationDelay: '0.6s' }}>t</span>
-            <span className="letter" style={{ animationDelay: '0.7s' }}>I</span>
-            <span className="letter" style={{ animationDelay: '0.8s' }}>Q</span>
-          </h1>
-          <p className="brand-tagline">Design-First. AI-Smart. Human at Heart</p>
-          
-        </div>
-
-        {/* Enhanced progress indicator */}
-        <div className="loader-progress">
-          <div className="progress-track">
-            <div 
-              className="progress-fill" 
-              style={{ width: `${Math.min(progress, 100)}%` }}
+        {/* Orange Field Waves Loader */}
+        <div className="relative w-full h-48 flex items-center justify-center mt-8">
+          {[0, 1, 2, 3, 4, 5].map((wave) => (
+            <div
+              key={wave}
+              className="absolute rounded-full border-2 border-vivid-orange animate-wave"
+              style={{
+                width: `${80 + wave * 50 + progress * 2}px`,
+                height: `${80 + wave * 50 + progress * 2}px`,
+                animationDelay: `${wave * 0.2}s`,
+                opacity: 0.6 - wave * 0.08,
+              }}
             />
-            <div className="progress-glow" style={{ width: `${Math.min(progress, 100)}%` }} />
-          </div>
-          <div className="progress-text">
-            {Math.round(Math.min(progress, 100))}%
+          ))}
+          <div className="absolute glass-panel px-6 py-3 rounded-full">
+            <span className="text-sm font-bold text-vivid-orange">{Math.round(Math.min(progress, 100))}%</span>
           </div>
         </div>
 
-        {/* Enhanced loading indicator */}
-        <div className="loading-indicator">
-          <div className="loading-dot" />
-          <div className="loading-dot" />
-          <div className="loading-dot" />
-          <div className="loading-pulse" />
-        </div>
-
-        {/* User interaction prompt */}
-        {showInteractionPrompt && (
-          <div className="interaction-prompt">
-            <p className="prompt-text">Click anywhere to enable audio</p>
-            <div className="prompt-pulse" />
-          </div>
-        )}
+        <style>{`
+          @keyframes wave {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+          }
+          .animate-wave {
+            animation: wave 3s ease-in-out infinite;
+          }
+        `}</style>
       </div>
 
       {/* Enhanced reveal animation */}
