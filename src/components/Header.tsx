@@ -1,10 +1,12 @@
 import { Menu, X, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const navigate = useNavigate();
 
   const navLinks = [
     {
@@ -34,6 +36,43 @@ export default function Header() {
     },
   ];
 
+  const handleMouseEnter = (label: string) => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(label);
+    }, 150);
+  };
+
+  const handleMouseLeave = () => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 200);
+  };
+
+  const handleParentClick = (e: React.MouseEvent, href: string, hasSubmenu: boolean) => {
+    if (hasSubmenu) {
+      e.preventDefault();
+      setActiveDropdown(prev => prev === e.currentTarget.textContent ? null : e.currentTarget.textContent);
+    }
+  };
+
+  const handleSubmenuClick = () => {
+    setActiveDropdown(null);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-brand-black/80 border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6">
@@ -47,23 +86,28 @@ export default function Header() {
               <div
                 key={link.label}
                 className="relative"
-                onMouseEnter={() => link.submenu && setActiveDropdown(link.label)}
-                onMouseLeave={() => setActiveDropdown(null)}
+                onMouseEnter={() => link.submenu && handleMouseEnter(link.label)}
+                onMouseLeave={() => link.submenu && handleMouseLeave()}
               >
                 <Link
                   to={link.href}
                   className="text-sm font-light text-neutral-300 hover:text-vivid-orange transition-colors flex items-center gap-1"
+                  onClick={(e) => handleParentClick(e, link.href, !!link.submenu)}
                 >
                   {link.label}
                   {link.submenu && <ChevronDown className="w-4 h-4" />}
                 </Link>
                 {link.submenu && activeDropdown === link.label && (
-                  <div className="absolute top-full left-0 mt-2 w-56 glass-panel p-2">
+                  <div
+                    className="absolute top-full left-0 mt-2 w-56 glass-panel p-2"
+                    style={{ pointerEvents: 'auto' }}
+                  >
                     {link.submenu.map((item) => (
                       <Link
                         key={item.label}
                         to={item.href}
                         className="block px-4 py-2 text-sm text-neutral-300 hover:text-vivid-orange hover:bg-white/5 rounded-lg transition-colors"
+                        onClick={handleSubmenuClick}
                       >
                         {item.label}
                       </Link>
