@@ -6,9 +6,9 @@ interface AnimatedBackgroundProps {
   className?: string;
 }
 
-export default function AnimatedBackground({ 
-  particleCount = 50, 
-  opacity = 0.4,
+export default function AnimatedBackground({
+  particleCount = 150,
+  opacity = 0.6,
   className = ""
 }: AnimatedBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -27,91 +27,174 @@ export default function AnimatedBackground({
 
     resizeCanvas();
 
-    const particles: Array<{
+    interface Particle {
       x: number;
       y: number;
+      z: number;
       vx: number;
       vy: number;
+      vz: number;
       size: number;
       opacity: number;
-    }> = [];
+      hue: number;
+    }
 
-    // Function to initialize/reset particles
+    const particles: Particle[] = [];
+    const connectionDistance = 120;
+
+    const mouse = {
+      x: 0,
+      y: 0,
+      radius: 150,
+    };
+
     const initializeParticles = () => {
       particles.length = 0;
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
+          z: Math.random() * 1000,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          vz: (Math.random() - 0.5) * 2,
           size: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.5 + 0.2,
+          opacity: Math.random() * 0.5 + 0.3,
+          hue: Math.random() * 60 + 170, // Cyan to blue range
         });
       }
     };
 
-    // Initialize particles
     initializeParticles();
 
-    let animationId: number;
-    let resetIntervalId: number;
-
     const animate = () => {
-      // Clear canvas with fade effect
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Update and draw particles
-      particles.forEach((particle) => {
-        // Update position
+      particles.forEach((particle, i) => {
+        // 3D movement simulation
         particle.x += particle.vx;
         particle.y += particle.vy;
+        particle.z += particle.vz;
 
-        // Bounce off edges
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+        // Wrap around edges
+        if (particle.x < 0) particle.x = canvas.width;
+        if (particle.x > canvas.width) particle.x = 0;
+        if (particle.y < 0) particle.y = canvas.height;
+        if (particle.y > canvas.height) particle.y = 0;
+        if (particle.z < 0) particle.z = 1000;
+        if (particle.z > 1000) particle.z = 0;
 
-        // Draw particle
+        // Apply perspective based on z-depth
+        const scale = 1000 / (1000 + particle.z);
+        const x2d = particle.x * scale + canvas.width * (1 - scale) / 2;
+        const y2d = particle.y * scale + canvas.height * (1 - scale) / 2;
+        const particleSize = particle.size * scale;
+        const particleOpacity = particle.opacity * scale;
+
+        // Mouse interaction - repel particles
+        const dx = x2d - mouse.x;
+        const dy = y2d - mouse.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < mouse.radius) {
+          const force = (mouse.radius - distance) / mouse.radius;
+          particle.vx += (dx / distance) * force * 0.5;
+          particle.vy += (dy / distance) * force * 0.5;
+        }
+
+        // Draw connections to nearby particles
+        particles.forEach((particle2, j) => {
+          if (i >= j) return;
+
+          const scale2 = 1000 / (1000 + particle2.z);
+          const x2d2 = particle2.x * scale2 + canvas.width * (1 - scale2) / 2;
+          const y2d2 = particle2.y * scale2 + canvas.height * (1 - scale2) / 2;
+
+          const dx = x2d - x2d2;
+          const dy = y2d - y2d2;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < connectionDistance) {
+            const opacity = (1 - dist / connectionDistance) * 0.3 * Math.min(scale, scale2);
+            ctx.beginPath();
+            ctx.strokeStyle = `hsla(${particle.hue}, 100%, 60%, ${opacity})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(x2d, y2d);
+            ctx.lineTo(x2d2, y2d2);
+            ctx.stroke();
+          }
+        });
+
+        // Draw particle with enhanced glow effect
+        const gradient = ctx.createRadialGradient(x2d, y2d, 0, x2d, y2d, particleSize * 3);
+        gradient.addColorStop(0, `hsla(${particle.hue}, 100%, 70%, ${particleOpacity})`);
+        gradient.addColorStop(0.5, `hsla(${particle.hue}, 100%, 60%, ${particleOpacity * 0.5})`);
+        gradient.addColorStop(1, `hsla(${particle.hue}, 100%, 50%, 0)`);
+
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 97, 0, ${particle.opacity})`;
+        ctx.arc(x2d, y2d, particleSize * 3, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
         ctx.fill();
+
+        // Core particle
+        ctx.beginPath();
+        ctx.arc(x2d, y2d, particleSize, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${particle.hue}, 100%, 80%, ${particleOpacity})`;
+        ctx.fill();
+
+        // Dampen velocity
+        particle.vx *= 0.99;
+        particle.vy *= 0.99;
       });
 
-      animationId = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
     };
 
     animate();
 
-    // Reset animation every 10 seconds
-    resetIntervalId = window.setInterval(() => {
-      initializeParticles();
-    }, 10000);
-
-    const handleResize = () => {
-      resizeCanvas();
-      // Reset particles for new canvas size
-      initializeParticles();
+    // Mouse interaction
+    const handleMouseMove = (e: MouseEvent) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
     };
 
-    window.addEventListener('resize', handleResize);
+    const handleMouseLeave = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
+    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('mouseleave', handleMouseLeave);
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      initializeParticles();
+    });
 
     return () => {
-      cancelAnimationFrame(animationId);
-      clearInterval(resetIntervalId);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', resizeCanvas);
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      canvas.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [particleCount]);
 
   return (
     <>
+      {/* Animated particle background */}
       <canvas
         ref={canvasRef}
         className={`absolute inset-0 pointer-events-none ${className}`}
         style={{ opacity }}
       />
-      <div className="absolute inset-0 bg-gradient-radial from-vivid-orange/5 via-transparent to-transparent" />
+      
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-glow-pulse pointer-events-none" />
+      <div 
+        className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-glow-pulse pointer-events-none" 
+        style={{ animationDelay: '1s' }} 
+      />
     </>
   );
 }
