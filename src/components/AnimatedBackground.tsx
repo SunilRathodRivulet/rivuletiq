@@ -116,10 +116,10 @@ export default function AnimatedBackground({
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < connectionDistance) {
-            const opacity = (1 - dist / connectionDistance) * 0.3 * Math.min(scale, scale2);
+            const opacity = (1 - dist / connectionDistance) * 0.8 * Math.min(scale, scale2);
             ctx.beginPath();
-            ctx.strokeStyle = `hsla(${particle.hue}, 100%, 60%, ${opacity})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `hsla(${particle.hue}, 100%, 70%, ${opacity})`;
+            ctx.lineWidth = 1.5;
             ctx.moveTo(x2d, y2d);
             ctx.lineTo(x2d2, y2d2);
             ctx.stroke();
@@ -186,14 +186,6 @@ export default function AnimatedBackground({
         ref={canvasRef}
         className={`absolute inset-0 pointer-events-none ${className}`}
         style={{ opacity }}
-      />
-      
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 pointer-events-none" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-glow-pulse pointer-events-none" />
-      <div 
-        className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-glow-pulse pointer-events-none" 
-        style={{ animationDelay: '1s' }} 
       />
     </>
   );
