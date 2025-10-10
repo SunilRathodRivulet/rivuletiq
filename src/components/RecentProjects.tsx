@@ -75,10 +75,10 @@ export default function RecentProjects() {
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 py-6 border-y border-white/10">
                     {project.metrics.map((metric, idx) => (
                       <div key={idx} className="text-center sm:text-left">
-                        <div className="text-2xl lg:text-3xl font-bold text-vivid-orange mb-1">
+                        <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-vivid-orange mb-1 break-words">
                           {metric.value}
                         </div>
-                        <div className="text-xs lg:text-sm text-neutral-400 font-light">
+                        <div className="text-xs sm:text-sm lg:text-sm text-neutral-400 font-light break-words">
                           {metric.label}
                         </div>
                       </div>
