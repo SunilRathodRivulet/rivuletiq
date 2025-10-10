@@ -116,10 +116,10 @@ export default function AnimatedBackground({
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < connectionDistance) {
-            const opacity = (1 - dist / connectionDistance) * 0.3 * Math.min(scale, scale2);
+            const opacity = (1 - dist / connectionDistance) * 0.8 * Math.min(scale, scale2);
             ctx.beginPath();
-            ctx.strokeStyle = `hsla(${particle.hue}, 100%, 60%, ${opacity})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `hsla(${particle.hue}, 100%, 70%, ${opacity})`;
+            ctx.lineWidth = 1.5;
             ctx.moveTo(x2d, y2d);
             ctx.lineTo(x2d2, y2d2);
             ctx.stroke();
