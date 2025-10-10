@@ -36,19 +36,26 @@ export default function AnimatedBackground({
       opacity: number;
     }> = [];
 
+    // Function to initialize/reset particles
+    const initializeParticles = () => {
+      particles.length = 0;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          size: Math.random() * 2 + 1,
+          opacity: Math.random() * 0.5 + 0.2,
+        });
+      }
+    };
+
     // Initialize particles
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.2,
-      });
-    }
+    initializeParticles();
 
     let animationId: number;
+    let resetIntervalId: number;
 
     const animate = () => {
       // Clear canvas with fade effect
@@ -77,19 +84,22 @@ export default function AnimatedBackground({
 
     animate();
 
+    // Reset animation every 10 seconds
+    resetIntervalId = window.setInterval(() => {
+      initializeParticles();
+    }, 10000);
+
     const handleResize = () => {
       resizeCanvas();
       // Reset particles for new canvas size
-      particles.forEach(particle => {
-        particle.x = Math.random() * canvas.width;
-        particle.y = Math.random() * canvas.height;
-      });
+      initializeParticles();
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => {
       cancelAnimationFrame(animationId);
+      clearInterval(resetIntervalId);
       window.removeEventListener('resize', handleResize);
     };
   }, [particleCount]);
