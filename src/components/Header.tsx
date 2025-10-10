@@ -27,7 +27,7 @@ export default function Header() {
     { label: 'About', href: '/about' },
     {
       label: 'Careers',
-      href: '/careers/open-roles',
+      href: '/',
       submenu: [
         { label: 'Open Roles', href: '/careers/open-roles' },
         { label: 'Life & Growth', href: '/careers/life-growth' },
@@ -57,7 +57,10 @@ export default function Header() {
   const handleParentClick = (e: React.MouseEvent, href: string, hasSubmenu: boolean) => {
     if (hasSubmenu) {
       e.preventDefault();
-      setActiveDropdown(prev => prev === e.currentTarget.textContent ? null : e.currentTarget.textContent);
+      const textContent = e.currentTarget.textContent;
+      if (textContent) {
+        setActiveDropdown(prev => prev === textContent ? null : textContent);
+      }
     }
   };
 
