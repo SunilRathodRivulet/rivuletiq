@@ -25,6 +25,7 @@ export default function Header() {
     { label: 'Work Together', href: '/engage' },
     { label: 'Tech & Tools', href: '/tech' },
     { label: 'About', href: '/about' },
+    { label: 'Demo Form', href: '/demo-form' },
     {
       label: 'Careers',
       href: '/',

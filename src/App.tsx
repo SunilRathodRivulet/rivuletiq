@@ -25,6 +25,7 @@ import OpenRoles from './pages/careers/OpenRoles';
 import LifeGrowth from './pages/careers/LifeGrowth';
 import Learning from './pages/careers/Learning';
 import Contact from './pages/Contact';
+import DemoForm from './pages/DemoForm';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -61,6 +62,7 @@ function App() {
             <Route path="/tech" element={<TechTools />} />
             <Route path="/about" element={<About />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/demo-form" element={<DemoForm />} />
             <Route path="/careers/open-roles" element={<OpenRoles />} />
             <Route path="/careers/life-growth" element={<LifeGrowth />} />
             <Route path="/careers/learning" element={<Learning />} />
